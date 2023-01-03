@@ -16,12 +16,5 @@ h1 {
     font-family: 'Oswald', sans-serif;
     color: white;
 }
-
-header {
-    font-family: 'Passion One', sans-serif;
-    font-size: 106px;
-    letter-spacing: 5px;
-    color: white;
-}
 `;
 export default GlobalStyle;
