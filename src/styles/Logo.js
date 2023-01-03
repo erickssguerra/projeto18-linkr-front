@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Sidebar = styled.header`
+export const Sidebar = styled.div`
   width: calc(100% - 535px);
   background: #151515;
 `;
@@ -11,7 +11,7 @@ export const Header = styled.header`
   letter-spacing: 5px;
   color: white;
   margin-top: 300px;
-    margin-left: 144px;
+  margin-left: 144px;
 `;
 
 export const Subtile = styled.h1`
