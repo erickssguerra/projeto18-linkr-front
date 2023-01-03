@@ -43,6 +43,9 @@ export const Input = styled.input`
 export const Button = styled.button`
   width: 330px;
   height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Oswald", sans-serif;
   font-weight: 700;
   font-size: 22px;
