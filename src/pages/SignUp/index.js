@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./style";
 import * as Screen from "../../styles/Screen";
-import * as Logo from "../../styles/Logo";
 import * as Form from "../../styles/Form";
 import { useState } from "react";
+import Logo from "../../components/Logo";
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,12 +17,7 @@ export default function SignUpPage() {
 
   return (
     <Screen.Container>
-      <Logo.Sidebar>
-        <Logo.Header>Linkr</Logo.Header>
-        <Logo.Subtile>
-          save, share and discover the best links on the web
-        </Logo.Subtile>
-      </Logo.Sidebar>
+      <Logo />
       <S.Container>
         <Form.Form>
           <Form.Input
