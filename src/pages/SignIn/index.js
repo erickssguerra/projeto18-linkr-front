@@ -34,7 +34,7 @@ export default function SignInPage() {
             disabled={isLoading}
             required
             data-identifier="input-email"
-          ></Form.Input>
+          />
           <Form.Input
             name="password"
             value={form.password}
@@ -43,7 +43,7 @@ export default function SignInPage() {
             placeholder="password"
             disabled={isLoading}
             required
-          ></Form.Input>
+          />
           <Form.Button>Log In</Form.Button>
         </Form.Form>
         <Link to="/sign-up">
