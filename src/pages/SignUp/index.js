@@ -1,13 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { api } from "../../services";
+import { loadingButton } from "../../assets/Spinners";
 import * as S from "./style";
 import * as Screen from "../../styles/Screen";
 import * as Form from "../../styles/Form";
-import { useState } from "react";
 import Logo from "../../components/Logo";
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    name: "",
+    picture_url: "",
+  });
   const navigate = useNavigate();
 
   function handleForm(event) {
@@ -15,11 +22,25 @@ export default function SignUpPage() {
     setForm({ ...form, [name]: value });
   }
 
+  function signUp(event) {
+    setIsLoading(true);
+    event.preventDefault();
+    api
+      .post("/signup", form)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+        setIsLoading(false);
+      });
+  }
+
   return (
     <Screen.Container>
       <Logo />
       <S.Container>
-        <Form.Form>
+        <Form.Form onSubmit={signUp}>
           <Form.Input
             name="email"
             value={form.email}
@@ -28,7 +49,6 @@ export default function SignUpPage() {
             placeholder="email"
             disabled={isLoading}
             required
-            data-identifier="input-email"
           />
           <Form.Input
             name="password"
@@ -57,7 +77,9 @@ export default function SignUpPage() {
             disabled={isLoading}
             required
           />
-          <Form.Button>Sign Up</Form.Button>
+          <Form.Button type="submit" disabled={isLoading}>
+            {isLoading ? loadingButton : "Sign Up"}
+          </Form.Button>
         </Form.Form>
         <Link to="/">
           <S.Link>Switch back to log in</S.Link>
