@@ -4,6 +4,7 @@ import { Await, useAsyncValue } from "react-router-dom";
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import PostsSkeleton from "../../components/PostsSkeleton";
+import PublishCard from "../../components/PublishCard";
 import { api } from "../../services";
 import {
   Title,
@@ -17,18 +18,22 @@ function Posts() {
   const resolvedData = useAsyncValue();
 
   return (
-    <PostsContainer>
-      {
-        resolvedData.map((data, index) => {
-          return (
-            <Post
-              data={data}
-              key={index}
-            />
-          )
-        })
-      }
-    </PostsContainer>
+    <>
+      <PublishCard />
+      <PostsContainer>
+        {
+          resolvedData.map((data, index) => {
+            return (
+              <Post
+                data={data}
+                key={index}
+              />
+            )
+          })
+        }
+      </PostsContainer>
+    </>
+    
   );
 };
 
@@ -37,7 +42,7 @@ export default function HomePage() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await api.get("http://localhost:4001/timeline");
+      const res = await api.get("/timeline");
       setPostData(res.data);
     }
 
