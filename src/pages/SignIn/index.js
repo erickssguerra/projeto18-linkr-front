@@ -29,7 +29,7 @@ export default function SignInPage() {
         navigate("/timeline");
       })
       .catch((error) => {
-        alert(error.response.data);
+        alert(error.response.data.message);
         setIsLoading(false);
       });
   }
