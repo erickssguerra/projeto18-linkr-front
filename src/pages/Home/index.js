@@ -4,6 +4,7 @@ import { Await, useAsyncValue, defer, useLoaderData } from "react-router-dom";
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import PostsSkeleton from "../../components/PostsSkeleton";
+import PublishCard from "../../components/PublishCard";
 import { api } from "../../services";
 import {
   Title,
@@ -25,18 +26,22 @@ function Posts() {
   const resolvedData = useAsyncValue();
 
   return (
-    <PostsContainer>
-      {
-        resolvedData.map((data, index) => {
-          return (
-            <Post
-              data={data}
-              key={index}
-            />
-          )
-        })
-      }
-    </PostsContainer>
+    <>
+      <PublishCard />
+      <PostsContainer>
+        {
+          resolvedData.map((data, index) => {
+            return (
+              <Post
+                data={data}
+                key={index}
+              />
+            )
+          })
+        }
+      </PostsContainer>
+    </>
+    
   );
 };
 

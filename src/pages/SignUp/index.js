@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../services";
 import { loadingButton } from "../../assets/Spinners";
 import * as S from "./style";
 import * as Screen from "../../styles/Screen";
 import * as Form from "../../styles/Form";
 import Logo from "../../components/Logo";
+import { useAuth } from "../../providers";
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +17,13 @@ export default function SignUpPage() {
     picture_url: "",
   });
   const navigate = useNavigate();
+  const { userAuth, setUserAuth } = useAuth();
+
+  useEffect(() => {
+    if (userAuth !== undefined) {
+      navigate("/timeline");
+    }
+  }, [userAuth]);
 
   function handleForm(event) {
     const { name, value } = event.target;
