@@ -25,6 +25,7 @@ export const PublishDialog = styled.div`
   width: 40rem;
 `;
 
-export const Posts = styled.ul`
+export const PostsContainer = styled.ul`
   width: 40rem;
+  color: #FFF;
 `;
