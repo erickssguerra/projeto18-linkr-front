@@ -2,15 +2,23 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Style from "./style";
 import * as Screen from "../../styles/Screen";
 import * as Form from "../../styles/Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../components/Logo";
 import { api } from "../../services";
 import { loadingButton } from "../../assets/Spinners";
+import { useAuth } from "../../providers";
 
 export default function SignInPage() {
+  const navigate = useNavigate();
+  const { userAuth, setUserAuth } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userAuth !== undefined) {
+      navigate("/timeline");
+    }
+  }, [userAuth]);
 
   function handleForm(event) {
     const { name, value } = event.target;
@@ -26,6 +34,8 @@ export default function SignInPage() {
     api
       .post(`/signin`, body)
       .then((response) => {
+        setUserAuth(response.data);
+        localStorage.setItem("linkr", JSON.stringify(response.data));
         navigate("/timeline");
       })
       .catch((error) => {
