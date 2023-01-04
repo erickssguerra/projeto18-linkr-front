@@ -10,7 +10,7 @@ import {
 export default function Snippet({ snippetData }) {
 
   return (
-    <SnippetContainer>
+    <SnippetContainer href={snippetData.url} target='_blank'>
       <SnippetText>
         <SnippetTitle>
           {snippetData.title}

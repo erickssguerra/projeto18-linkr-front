@@ -1,5 +1,5 @@
-import { Suspense, useEffect, useState } from "react";
-import { Await, useAsyncValue } from "react-router-dom";
+import { Suspense } from "react";
+import { Await, useAsyncValue, defer, useLoaderData } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Post from "../../components/Post";
@@ -13,6 +13,14 @@ import {
   PublishDialog,
   PostsContainer
 } from './style';
+
+export async function loader() {
+  const res = await api.get("http://localhost:4000/timeline");
+  
+  return defer({
+    postsData: res.data
+  });
+};
 
 function Posts() {
   const resolvedData = useAsyncValue();
@@ -38,16 +46,7 @@ function Posts() {
 };
 
 export default function HomePage() {
-  const [postData, setPostData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const res = await api.get("/timeline");
-      setPostData(res.data);
-    }
-
-    fetchData();
-  }, []);
+  const { postsData } = useLoaderData();
 
   return (
     <Container>
@@ -61,7 +60,7 @@ export default function HomePage() {
         </PublishDialog>
         <Suspense fallback={<PostsSkeleton />}>
           <Await
-            resolve={postData}
+            resolve={postsData}
             errorElement={
               <div>An error occurred while trying to fetch the posts, please refresh the page</div>
             }

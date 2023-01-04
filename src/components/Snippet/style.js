@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SnippetContainer = styled.div`
+export const SnippetContainer = styled.a`
 display: flex;
 flex-direction: row;
 border-radius: 1rem;
