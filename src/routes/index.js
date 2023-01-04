@@ -1,22 +1,42 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "../pages/Home";
+import { createBrowserRouter } from "react-router-dom";
+
+import HomePage, { loader as homeLoader } from "../pages/Home";
 import HashPage from "../pages/Hash";
 import SignInPage from "../pages/SignIn";
 import SignUpPage from "../pages/SignUp";
 import UserPage from "../pages/User";
 import NotFoundPage from "../pages/NotFount";
 
-export default function RouterProvider() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/timeline" element={<HomePage />} />
-        <Route path="/hashtag/:hashtag" element={<HashPage />} />
-        <Route path="/user/:id" element={<UserPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Router>
-  );
-}
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <SignInPage />,
+    errorElement: <NotFoundPage />
+  },
+  {
+    path: '/sign-up',
+    element: <SignUpPage />,
+    errorElement: <NotFoundPage />
+  },
+  {
+    path: '/timeline',
+    element: <HomePage />,
+    errorElement: <NotFoundPage />,
+    loader: homeLoader
+  },
+  {
+    path: '/hashtag/:hashtag',
+    element: <HashPage />,
+    errorElement: <NotFoundPage />
+  },
+  {
+    path: '/user/:id',
+    element: <UserPage />,
+    errorElement: <NotFoundPage />
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+    errorElement: <NotFoundPage />
+  }
+]);
