@@ -25,11 +25,12 @@ export const Input = styled.input`
   border-radius: 6px;
   border: none;
   margin-bottom: 13px;
+  opacity: ${(props) => (props.disabled ? "0.7" : "1")};
   &placeholder {
     color: #9f9f9f;
   }
   &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
     -webkit-text-fill-color: #000000 !important;
   }
 
@@ -54,6 +55,7 @@ export const Button = styled.button`
   border-radius: 6px;
   border: none;
   margin-bottom: 22px;
+  cursor: ${(props) => (props.disabled ? "cursor" : "pointer")};
 
   @media ${device.desktop} {
     width: 430px;

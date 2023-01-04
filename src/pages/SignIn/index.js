@@ -20,6 +20,18 @@ export default function SignInPage() {
   function signIn(event) {
     event.preventDefault();
     setIsLoading(true);
+
+    const body = form;
+
+    api
+      .post(`/signin`, body)
+      .then((response) => {
+        navigate("/timeline");
+      })
+      .catch((error) => {
+        alert(error.response.data);
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -35,7 +47,6 @@ export default function SignInPage() {
             placeholder="email"
             disabled={isLoading}
             required
-            data-identifier="input-email"
           />
           <Form.Input
             name="password"
