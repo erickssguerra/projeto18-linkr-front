@@ -8,6 +8,7 @@ import {
   Description
 } from "./style";
 import Snippet from "../Snippet";
+import Like from "../Like";
 
 export default function Post({ data }) {
   const snippetData = {
@@ -19,12 +20,14 @@ export default function Post({ data }) {
 
   return (
     <PostContainer>
-      <LeftContainer>        
+      <LeftContainer>
         <UserImg src={data.userImage} />
-        <LikesContainer />
+        <LikesContainer>
+          <Like likes={data.likes} />
+        </LikesContainer>
       </LeftContainer>
       <RightContainer>
-        <UserName>
+      <UserName>
           {data.user}
         </UserName>
         <Description>
