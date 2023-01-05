@@ -1,52 +1,52 @@
-import { Suspense } from "react";
-import { Await, useAsyncValue, defer, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  useNavigate
+} from "react-router-dom";
 
 import Header from "../../components/Header";
-import Post from "../../components/Post";
-import PostsSkeleton from "../../components/PostsSkeleton";
-import PublishCard from "../../components/PublishCard";
+import Posts from "../../components/Posts";
 import { api } from "../../services";
 import {
   Title,
   Container,
-  MainContent,
-  PublishDialog,
-  PostsContainer
+  MainContent
 } from './style';
-
-export async function loader() {
-  const res = await api.get("http://localhost:4000/timeline");
-  
-  return defer({
-    postsData: res.data
-  });
-};
-
-function Posts() {
-  const resolvedData = useAsyncValue();
-
-  return (
-    <>
-      <PublishCard />
-      <PostsContainer>
-        {
-          resolvedData.map((data, index) => {
-            return (
-              <Post
-                data={data}
-                key={index}
-              />
-            )
-          })
-        }
-      </PostsContainer>
-    </>
-    
-  );
-};
+import { useAuth } from "../../providers";
 
 export default function HomePage() {
-  const { postsData } = useLoaderData();
+  const [postsData, setPostsData] = useState(undefined);
+  const [isLoading, setLoading] = useState(0);
+  const { userAuth, setUserAuth } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userAuth)
+      return navigate('/');
+
+    async function fetchData() {
+      setLoading(1);
+
+      try {
+
+        const res = await api.get('/timeline', {
+          headers: { Authorization: `Bearer ${userAuth.token}` }
+        });
+
+        setPostsData(res.data);
+        setLoading(0);
+      } catch (e) {
+        setUserAuth(undefined);
+        setLoading(0);
+
+        return navigate('/');
+      };
+    };
+
+    fetchData();
+  }, [userAuth, navigate, setUserAuth, setLoading]);
+
+  if (!userAuth)
+    return;
 
   return (
     <Container>
@@ -55,19 +55,10 @@ export default function HomePage() {
         timeline
       </Title>
       <MainContent>
-        <PublishDialog>
-
-        </PublishDialog>
-        <Suspense fallback={<PostsSkeleton />}>
-          <Await
-            resolve={postsData}
-            errorElement={
-              <div>An error occurred while trying to fetch the posts, please refresh the page</div>
-            }
-          >
-            <Posts />
-          </Await>
-        </Suspense>
+        <Posts
+          data={postsData}
+          isLoading={isLoading}
+        />
       </MainContent>
     </Container>
   );
