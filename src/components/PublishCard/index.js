@@ -1,26 +1,48 @@
 import { useState } from "react";
+import { useAuth } from "../../providers";
+import { api } from "../../services";
 import * as Styles from "./style";
 
 export default function PublishCard() {
+  const { userAuth } = useAuth();
+
   const [post, setPost] = useState({
     url: "",
     description: "",
   });
 
+  const [isPublishing, setIsPublishing] = useState(false);
+
   function getDescriptionHashtags(description) {
     const splittedText = description.split(/\s+/);
-    console.log(splittedText);
     const hashtags = splittedText.filter((word) => word[0] === "#");
-    console.log(hashtags);
     return hashtags;
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(post);
+
+    setIsPublishing(true);
 
     const hashtags = getDescriptionHashtags(post.description);
-    console.log(hashtags);
+
+    api
+      .post("/timeline", {
+        url: post.url,
+        description: post.description,
+        hashtagsArray: hashtags,
+      }, {
+        headers: {
+          Authorization: `Bearer ${userAuth.token}`,
+        }
+      })
+      .then((res) => {
+        setIsPublishing(false);
+      })
+      .catch((err) => {
+        alert("Houve um erro ao publicar seu link");
+        setIsPublishing(false);
+      });
 
     setPost({
       url: "",
@@ -29,31 +51,36 @@ export default function PublishCard() {
   }
 
   return (
-    <Styles.card>
-      <Styles.pictureDiv>
-        <Styles.picture
-          src="https://a.pinatafarm.com/312x296/ae7f8ccd22/sad-thumbs-up-cat.jpg/m/522x0"
-          alt="Profile Picture"
-        />
-      </Styles.pictureDiv>
-      <Styles.textDiv>
-        <Styles.cardTitle>What are you going to share today?</Styles.cardTitle>
-        <form onSubmit={handleSubmit}>
-          <Styles.urlInput
-            placeholder="http://..."
-            type="url"
-            onChange={(e) => setPost({ ...post, url: e.target.value })}
-            value={post.url}
-            required
-          />
-          <Styles.descriptionTextarea
-            placeholder="Awesome article about #javascript"
-            onChange={(e) => setPost({ ...post, description: e.target.value })}
-            value={post.description}
-          />
-          <Styles.publishButton type="submit">Publish</Styles.publishButton>
-        </form>
-      </Styles.textDiv>
-    </Styles.card>
+    <>
+      {userAuth && (
+        <Styles.card>
+          <Styles.pictureDiv>
+            <Styles.picture src={userAuth.picture_url} alt="Profile Picture" />
+          </Styles.pictureDiv>
+          <Styles.textDiv>
+            <Styles.cardTitle>What are you going to share today?</Styles.cardTitle>
+            <form onSubmit={handleSubmit}>
+              <Styles.urlInput
+                placeholder="http://..."
+                type="url"
+                onChange={(e) => setPost({ ...post, url: e.target.value })}
+                value={post.url}
+                required
+                disabled={isPublishing}
+              />
+              <Styles.descriptionTextarea
+                placeholder="Awesome article about #javascript"
+                onChange={(e) => setPost({ ...post, description: e.target.value })}
+                value={post.description}
+                disabled={isPublishing}
+              />
+              <Styles.publishButton type="submit" disabled={isPublishing}>
+                {isPublishing ? "Publishing..." : "Publish"}
+              </Styles.publishButton>
+            </form>
+          </Styles.textDiv>
+        </Styles.card>
+      )}
+    </>
   );
 }
