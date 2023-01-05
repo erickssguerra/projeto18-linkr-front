@@ -26,8 +26,13 @@ export const UserImg = styled.img`
   background: #FFF;
 `;
 
-export const LikesContainer = styled.div` 
-
+export const LikesContainer = styled.div`
+  width: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
 `;
 
 export const RightContainer = styled.div`
