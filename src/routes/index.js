@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import HomePage, { loader as homeLoader } from "../pages/Home";
-import HashPage from "../pages/Hash";
+import HashPage, { loader as hashLoader } from "../pages/Hash";
 import SignInPage from "../pages/SignIn";
 import SignUpPage from "../pages/SignUp";
 import UserPage from "../pages/User";
@@ -27,7 +27,8 @@ export const router = createBrowserRouter([
   {
     path: '/hashtag/:hashtag',
     element: <HashPage />,
-    errorElement: <NotFoundPage />
+    errorElement: <NotFoundPage />,
+    loader: hashLoader
   },
   {
     path: '/user/:id',
