@@ -88,7 +88,7 @@ export const publishButton = styled.button`
   background-color: #1877f2;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: ${(props) => props.disabled ? "default" : "pointer"};
 
   font-family: "Lato", sans-serif;
   font-weight: 700;
