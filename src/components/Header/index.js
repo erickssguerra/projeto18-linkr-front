@@ -15,7 +15,7 @@ import { useAuth } from "../../providers";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { setUserAuth } = useAuth();
+  const { userAuth, setUserAuth } = useAuth();
   const [openMenu, setOpenMenu] = useState(false);
 
   function selectMenu() {
@@ -36,7 +36,13 @@ export default function Header() {
         <MenuSelect onClick={selectMenu}>
           {openMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </MenuSelect>
-        <MenuImage onClick={selectMenu} />
+        {userAuth && (
+          <MenuImage
+            onClick={selectMenu}
+            src={userAuth.picture_url}
+            alt="user picture"
+          />
+        )}
         {openMenu && (
           <MenuContainer onClick={selectMenu}>
             <DropdownMenuActive>
