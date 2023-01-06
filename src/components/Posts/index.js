@@ -1,3 +1,6 @@
+import { ReactTagify } from 'react-tagify';
+import { useNavigate } from 'react-router-dom';
+
 import {
   PostContainer,
   PostsContainer,
@@ -14,6 +17,7 @@ import Snippet from "../Snippet";
 import Like from "../Like";
 
 function Post({ data }) {
+  const navigate = useNavigate();
   const snippetData = {
     title: data.metadata.title,
     description: data.metadata.description,
@@ -33,9 +37,14 @@ function Post({ data }) {
       <UserName>
           {data.user}
         </UserName>
-        <Description>
-          {data.description}
-        </Description>
+        <ReactTagify
+          colors="white"
+          tagClicked={(tag) => {navigate(`/hashtag/${tag.replace('#', '')}`)}}
+        >
+          <Description>
+            {data.description}
+          </Description>
+        </ReactTagify>
         <Snippet snippetData={snippetData} />
       </RightContainer>
     </PostContainer>
