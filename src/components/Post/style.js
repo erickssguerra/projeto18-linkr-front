@@ -76,6 +76,10 @@ export const UpperContent = styled.div`
   justify-content: space-between;
 `;
 
+export const PostIcons = styled.div`
+
+`;
+
 export const DeleteIcon = styled.button`
   font-size: 1rem;
   color: #ffffff;

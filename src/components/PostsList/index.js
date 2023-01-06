@@ -3,7 +3,6 @@ import {
   PostsContainer,
   Message,
 } from "./style";
-import PublishCard from "../PublishCard";
 
 export default function PostsList({ data, isLoading }) {
   const resolvedData = data;
@@ -33,7 +32,6 @@ export default function PostsList({ data, isLoading }) {
 
   return (
     <>
-      <PublishCard />
       <PostsContainer>
         {
           resolvedData.map((data, index) => {

@@ -5,10 +5,10 @@ import {
 } from "react-router-dom";
 
 import Header from "../../components/Header";
-import Posts from "../../components/Posts";
 import { api } from "../../services";
 import * as Style from "./style";
 import { useAuth } from "../../providers";
+import PostsList from "../../components/PostsList";
 
 export default function HashPage() {
   const [postsData, setPostsData] = useState(undefined);
@@ -51,7 +51,7 @@ export default function HashPage() {
         # {hashtag}
       </Style.Title>
       <Style.MainContent>
-        <Posts
+        <PostsList
           data={postsData}
           isLoading={isLoading}
         />
