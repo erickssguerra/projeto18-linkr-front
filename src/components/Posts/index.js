@@ -1,5 +1,10 @@
+import { ReactTagify } from "react-tagify";
+import { useNavigate } from "react-router-dom";
+
 import {
   PostContainer,
+  PostsContainer,
+  Message,
   RightContainer,
   UserImg,
   LeftContainer,
@@ -8,6 +13,7 @@ import {
   Description,
   DeleteIcon,
 } from "./style";
+import PublishCard from "../../components/PublishCard";
 import Snippet from "../Snippet";
 import Like from "../Like";
 import { FaTrash } from "react-icons/fa";
@@ -16,7 +22,8 @@ import { useState } from "react";
 import { useAuth } from "../../providers";
 import { api } from "../../services";
 
-export default function Post({ data }) {
+function Post({ data }) {
+  const navigate = useNavigate();
   const snippetData = {
     title: data.metadata.title,
     description: data.metadata.description,
@@ -64,7 +71,14 @@ export default function Post({ data }) {
       </LeftContainer>
       <RightContainer>
         <UserName>{data.user}</UserName>
-        <Description>{data.description}</Description>
+        <ReactTagify
+          colors="white"
+          tagClicked={(tag) => {
+            navigate(`/hashtag/${tag.replace("#", "")}`);
+          }}
+        >
+          <Description>{data.description}</Description>
+        </ReactTagify>
         <Snippet snippetData={snippetData} />
       </RightContainer>
       {userAuth.name === data.user && (
@@ -73,5 +87,36 @@ export default function Post({ data }) {
         </DeleteIcon>
       )}
     </PostContainer>
+  );
+}
+
+export default function Posts({ data, isLoading }) {
+  const resolvedData = data;
+
+  if (isLoading) {
+    return <Message>Loading...</Message>;
+  }
+
+  if (!data) {
+    return (
+      <Message>
+        An error ocurred while trying to fetch the posts, please refresh the
+        page
+      </Message>
+    );
+  }
+  if (data.length === 0) {
+    return <Message>There are no posts yet :(</Message>;
+  }
+
+  return (
+    <>
+      <PublishCard />
+      <PostsContainer>
+        {resolvedData.map((data, index) => {
+          return <Post data={data} key={index} />;
+        })}
+      </PostsContainer>
+    </>
   );
 }

@@ -1,24 +1,32 @@
 import styled from "styled-components";
-import { device } from "../../assets/breakpoints";
 
-export const Container = styled.div`
+export const Title = styled.h1`
+  margin: 4rem 0 2rem 0;
   display: flex;
-  flex-direction: column;
+  width: 40rem;
+  justify-content: left;
+  color: #FFF;
+  font-family: 'Oswald', sans-serif;
+  font-size: 4rem;
 
-  @media ${device.desktop} {
-    width: 937px;
-    margin: 0 auto;
+  @media (max-width: 1024px) {
+    width: 100%;
+    font-size: 33px;
+    padding-left: 1rem;
+    margin: 2rem 0;
   }
 `;
 
-export const Title = styled.h1`
-  font-weight: 700;
-  font-size: 2rem;
-  color: #ffffff;
-  padding: 2rem 1rem;
+export const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-  @media ${device.desktop} {
-    font-size: 3rem;
-    padding: 4rem 0 3rem 0;
+export const MainContent = styled.section`
+  width: 40rem;
+
+  @media (max-width: 1024px) {
+    width: 100%;
   }
 `;
