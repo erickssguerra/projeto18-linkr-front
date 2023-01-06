@@ -19,6 +19,7 @@ import Like from "../Like";
 import PostDescription from '../PostDescription';
 import { ModalComponent } from "../Modal";
 import { api } from "../../services";
+import { AlertModalComponent } from "../AlertModal";
 
 
 export default function Post({ data }) {
@@ -53,7 +54,8 @@ export default function Post({ data }) {
       })
       .catch((error) => {
         setIsOpen(false);
-        alert(error.response.data);
+        setAlertMessage(error.response.data);
+        setAlertIsOpen(true);
       });
   };
 
@@ -66,6 +68,12 @@ export default function Post({ data }) {
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
         deletePost={deletePost}
+      />
+      <AlertModalComponent
+        title="Action could not be completed!"
+        subtitle={alertMessage}
+        alertModalIsOpen={alertModalIsOpen}
+        setAlertIsOpen={setAlertIsOpen}
       />
       <LeftContainer>
         <UserImg src={data.userImage} />
