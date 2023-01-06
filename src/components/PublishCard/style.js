@@ -12,14 +12,16 @@ export const card = styled.div`
   display: flex;
 
   @media ${device.tablet} {
-    width: 611px;
     height: 209px;
     padding: 20px;
-    border-radius: 16px;
     margin: 0px 0px 30px 0px;
+
+    justify-content: center;
   }
 
   @media ${device.desktop} {
+    width: 611px;
+    border-radius: 16px;
     margin: 0px 0px 30px -29px;
   }
 `;

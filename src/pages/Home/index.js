@@ -10,9 +10,13 @@ import { api } from "../../services";
 import {
   Title,
   Container,
-  MainContent
+  MainContent,
+  PageContent,
+  PublishAndPostsDiv,
+  TrendingDiv
 } from './style';
 import { useAuth } from "../../providers";
+import TrendingCard from "../../components/TrendingCard";
 
 export default function HomePage() {
   const [postsData, setPostsData] = useState(undefined);
@@ -55,13 +59,23 @@ export default function HomePage() {
       <Title>
         timeline
       </Title>
-      <PublishCard postPublished={postPublished} setPostPublished={setPostPublished}/>
-      <MainContent>
-        <PostsList
-          data={postsData}
-          isLoading={isLoading}
-        />
-      </MainContent>
+      <PageContent>
+
+        <PublishAndPostsDiv>
+          <PublishCard postPublished={postPublished} setPostPublished={setPostPublished}/>
+          <MainContent>
+            <PostsList
+              data={postsData}
+              isLoading={isLoading}
+            />
+          </MainContent>
+        </PublishAndPostsDiv>
+
+        <TrendingDiv>
+          <TrendingCard />
+        </TrendingDiv>
+
+      </PageContent>     
     </Container>
   );
 }
