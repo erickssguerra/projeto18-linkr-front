@@ -13,7 +13,6 @@ import {
   Description,
   DeleteIcon,
 } from "./style";
-import PublishCard from "../../components/PublishCard";
 import Snippet from "../Snippet";
 import Like from "../Like";
 import { FaTrash } from "react-icons/fa";
@@ -110,13 +109,10 @@ export default function Posts({ data, isLoading }) {
   }
 
   return (
-    <>
-      <PublishCard />
-      <PostsContainer>
-        {resolvedData.map((data, index) => {
-          return <Post data={data} key={index} />;
-        })}
-      </PostsContainer>
-    </>
+    <PostsContainer>
+      {resolvedData.map((data, index) => {
+        return <Post data={data} key={index} />;
+      })}
+    </PostsContainer>
   );
 }
