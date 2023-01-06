@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
   {
     path: '/hashtag/:hashtag',
     element: <HashPage />,
-    errorElement: <NotFoundPage />
+    errorElement: <NotFoundPage />,
   },
   {
     path: '/user/:id',

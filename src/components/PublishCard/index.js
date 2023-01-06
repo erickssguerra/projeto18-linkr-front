@@ -3,7 +3,7 @@ import { useAuth } from "../../providers";
 import { api } from "../../services";
 import * as Styles from "./style";
 
-export default function PublishCard() {
+export default function PublishCard({postPublished, setPostPublished}) {
   const { userAuth } = useAuth();
 
   const [post, setPost] = useState({
@@ -37,6 +37,7 @@ export default function PublishCard() {
         }
       })
       .then((res) => {
+        setPostPublished(!postPublished);
         setIsPublishing(false);
       })
       .catch((err) => {
