@@ -10,6 +10,7 @@ export const PostContainer = styled.div`
   flex-direction: row;
   padding: 1rem;
   margin-bottom: 1rem;
+  position: relative;
 `;
 
 export const LeftContainer = styled.div`
@@ -48,4 +49,15 @@ export const UserName = styled.h2`
 
 export const Description = styled.p`
 
+`;
+
+export const DeleteIcon = styled.button`
+  font-size: 1rem;
+  color: #ffffff;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #171717;
+  border: none;
+  cursor: pointer;
 `;
