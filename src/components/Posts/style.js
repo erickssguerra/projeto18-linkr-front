@@ -10,6 +10,7 @@ export const PostContainer = styled.div`
   flex-direction: row;
   padding: 1.2rem 0.8rem;
   margin-bottom: 1rem;
+  position: relative;
   font-family: !important'Lato', sans-serif;
 
   @media (max-width: 1024px) {
@@ -35,7 +36,7 @@ export const UserImg = styled.img`
   height: 50px;
   width: 50px;
   border-radius: 2rem;
-  background: #FFF;
+  background: #fff;
 
   @media (max-width: 768px) {
     height: 40px;
@@ -56,12 +57,11 @@ export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-
 `;
 
 export const UserName = styled.h2`
   font-size: 19px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   margin-bottom: 0.8rem;
 
   @media (max-width: 768px) {
@@ -70,7 +70,7 @@ export const UserName = styled.h2`
 `;
 
 export const Description = styled.p`
-  color: #B7B7B7;
+  color: #b7b7b7;
   font-size: 17px;
   margin-bottom: 0.8rem;
 
@@ -81,7 +81,7 @@ export const Description = styled.p`
 
 export const PostsContainer = styled.ul`
   width: 40rem;
-  color: #FFF;
+  color: #fff;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -89,5 +89,16 @@ export const PostsContainer = styled.ul`
 `;
 
 export const Message = styled.p`
-  color: #FFF;
+  color: #fff;
+`;
+
+export const DeleteIcon = styled.button`
+  font-size: 1rem;
+  color: #ffffff;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #171717;
+  border: none;
+  cursor: pointer;
 `;
