@@ -8,6 +8,13 @@ export const Title = styled.h1`
   color: #FFF;
   font-family: 'Oswald', sans-serif;
   font-size: 4rem;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    font-size: 33px;
+    padding-left: 1rem;
+    margin: 2rem 0;
+  }
 `;
 
 export const Container = styled.main`
@@ -18,4 +25,8 @@ export const Container = styled.main`
 
 export const MainContent = styled.section`
   width: 40rem;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
