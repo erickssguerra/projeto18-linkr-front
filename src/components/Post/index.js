@@ -1,43 +1,46 @@
-import { ReactTagify } from "react-tagify";
-import { useNavigate } from "react-router-dom";
+import { BsPencil } from 'react-icons/bs';
+import { FaTrash } from "react-icons/fa";
+import { useState } from "react";
+import { useAuth } from "../../providers";
 
 import {
   PostContainer,
-  PostsContainer,
-  Message,
+  PostIcons,
+  UpperContent,
   RightContainer,
   UserImg,
   LeftContainer,
   LikesContainer,
   UserName,
-  Description,
-  DeleteIcon,
+  DeleteIcon
 } from "./style";
 import Snippet from "../Snippet";
 import Like from "../Like";
-import { FaTrash } from "react-icons/fa";
+import PostDescription from '../PostDescription';
 import { ModalComponent } from "../Modal";
-import { useState } from "react";
-import { useAuth } from "../../providers";
 import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
 
-function Post({ data }) {
-  const navigate = useNavigate();
+
+export default function Post({ data }) {
+  console.log(data);
+  const [isEditing, setEditing] = useState(0);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const { userAuth } = useAuth();
   const snippetData = {
     title: data.metadata.title,
     description: data.metadata.description,
     url: data.url,
-    icon: data.metadata.icon,
+    icon: data.metadata.icon
   };
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [alertModalIsOpen, setAlertIsOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-  const { userAuth } = useAuth();
 
   function openModal() {
     setIsOpen(true);
-  }
+  };
+
+  const toggleEditing = () => {
+    setEditing(!isEditing);
+  };
 
   function deletePost() {
     api
@@ -54,7 +57,7 @@ function Post({ data }) {
         setAlertMessage(error.response.data);
         setAlertIsOpen(true);
       });
-  }
+  };
 
   return (
     <PostContainer>
@@ -79,50 +82,30 @@ function Post({ data }) {
         </LikesContainer>
       </LeftContainer>
       <RightContainer>
-        <UserName>{data.user}</UserName>
-        <ReactTagify
-          colors="white"
-          tagClicked={(tag) => {
-            navigate(`/hashtag/${tag.replace("#", "")}`);
+        <UpperContent>
+          <UserName>
+            {data.user}
+          </UserName>
+          <PostIcons>
+            <BsPencil
+              onClick={toggleEditing}
+            />
+            {userAuth.name === data.user && (
+              <DeleteIcon onClick={openModal}>
+                <FaTrash />
+              </DeleteIcon>
+            )}
+          </PostIcons>
+        </UpperContent>
+        <PostDescription
+          data={data}
+          state={{
+            isEditing: isEditing,
+            setEditing: setEditing
           }}
-        >
-          <Description>{data.description}</Description>
-        </ReactTagify>
+        />
         <Snippet snippetData={snippetData} />
       </RightContainer>
-      {userAuth.name === data.user && (
-        <DeleteIcon onClick={openModal}>
-          <FaTrash />
-        </DeleteIcon>
-      )}
     </PostContainer>
   );
-}
-
-export default function Posts({ data, isLoading }) {
-  const resolvedData = data;
-
-  if (isLoading) {
-    return <Message>Loading...</Message>;
-  }
-
-  if (!data) {
-    return (
-      <Message>
-        An error ocurred while trying to fetch the posts, please refresh the
-        page
-      </Message>
-    );
-  }
-  if (data.length === 0) {
-    return <Message>There are no posts yet :(</Message>;
-  }
-
-  return (
-    <PostsContainer>
-      {resolvedData.map((data, index) => {
-        return <Post data={data} key={index} />;
-      })}
-    </PostsContainer>
-  );
-}
+};

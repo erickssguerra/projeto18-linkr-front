@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 
 import Header from "../../components/Header";
-import Posts from "../../components/Posts";
+import PostsList from "../../components/PostsList";
 import PublishCard from "../../components/PublishCard";
 import { api } from "../../services";
 import {
@@ -33,7 +33,6 @@ export default function HomePage() {
       setLoading(1);
 
       try {
-
         const res = await api.get('/timeline', {
           headers: { Authorization: `Bearer ${userAuth.token}` }
         });
@@ -65,7 +64,7 @@ export default function HomePage() {
         <PublishAndPostsDiv>
           <PublishCard postPublished={postPublished} setPostPublished={setPostPublished}/>
           <MainContent>
-            <Posts
+            <PostsList
               data={postsData}
               isLoading={isLoading}
             />

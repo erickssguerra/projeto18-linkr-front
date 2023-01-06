@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const PostContainer = styled.div`
   background: #171717;
   width: 611px;
@@ -69,27 +70,14 @@ export const UserName = styled.h2`
   }
 `;
 
-export const Description = styled.p`
-  color: #b7b7b7;
-  font-size: 17px;
-  margin-bottom: 0.8rem;
-
-  @media (max-width: 768px) {
-    font-size: 15px;
-  }
+export const UpperContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
-export const PostsContainer = styled.ul`
-  width: 40rem;
-  color: #fff;
+export const PostIcons = styled.div`
 
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
-`;
-
-export const Message = styled.p`
-  color: #fff;
 `;
 
 export const DeleteIcon = styled.button`
