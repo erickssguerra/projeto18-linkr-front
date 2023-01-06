@@ -26,6 +26,8 @@ export default function Post({ data }) {
   console.log(data);
   const [isEditing, setEditing] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [alertModalIsOpen, setAlertIsOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const { userAuth } = useAuth();
   const snippetData = {
     title: data.metadata.title,
