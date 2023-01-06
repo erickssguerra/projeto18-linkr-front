@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Modal from "react-modal";
 import * as Style from "./style";
 import "./style.css";

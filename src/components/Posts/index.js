@@ -20,6 +20,7 @@ import { ModalComponent } from "../Modal";
 import { useState } from "react";
 import { useAuth } from "../../providers";
 import { api } from "../../services";
+import { AlertModalComponent } from "../AlertModal";
 
 function Post({ data }) {
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ function Post({ data }) {
     icon: data.metadata.icon,
   };
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [alertModalIsOpen, setAlertIsOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const { userAuth } = useAuth();
 
   function openModal() {
@@ -48,7 +51,8 @@ function Post({ data }) {
       })
       .catch((error) => {
         setIsOpen(false);
-        alert(error.response.data);
+        setAlertMessage(error.response.data);
+        setAlertIsOpen(true);
       });
   }
 
@@ -61,6 +65,12 @@ function Post({ data }) {
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
         deletePost={deletePost}
+      />
+      <AlertModalComponent
+        title="Action could not be completed!"
+        subtitle={alertMessage}
+        alertModalIsOpen={alertModalIsOpen}
+        setAlertIsOpen={setAlertIsOpen}
       />
       <LeftContainer>
         <UserImg src={data.userImage} />
