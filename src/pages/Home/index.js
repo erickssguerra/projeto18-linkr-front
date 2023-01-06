@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 
 import Header from "../../components/Header";
-import Posts from "../../components/Posts";
+import PostsList from "../../components/PostsList";
 import { api } from "../../services";
 import {
   Title,
@@ -27,7 +27,6 @@ export default function HomePage() {
       setLoading(1);
 
       try {
-
         const res = await api.get('/timeline', {
           headers: { Authorization: `Bearer ${userAuth.token}` }
         });
@@ -55,7 +54,7 @@ export default function HomePage() {
         timeline
       </Title>
       <MainContent>
-        <Posts
+        <PostsList
           data={postsData}
           isLoading={isLoading}
         />
