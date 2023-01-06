@@ -1,25 +1,7 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import * as Style from "./style";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    background: "#333333",
-    borderRadius: "3rem",
-    width: "37rem",
-    height: "16rem",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-};
+import "./style.css";
 
 Modal.setAppElement("#root");
 
@@ -39,11 +21,7 @@ export function ModalComponent({
 
   return (
     <div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="Modal">
         <Style.Title ref={(_subtitle) => (subtitle = _subtitle)}>
           {title}
         </Style.Title>
