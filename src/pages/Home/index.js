@@ -5,6 +5,7 @@ import {
 
 import Header from "../../components/Header";
 import Posts from "../../components/Posts";
+import PublishCard from "../../components/PublishCard";
 import { api } from "../../services";
 import {
   Title,
@@ -17,6 +18,7 @@ export default function HomePage() {
   const [postsData, setPostsData] = useState(undefined);
   const [isLoading, setLoading] = useState(0);
   const { userAuth, setUserAuth } = useAuth();
+  const [postPublished, setPostPublished] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function HomePage() {
     };
 
     fetchData();
-  }, [userAuth, navigate, setUserAuth, setLoading]);
+  }, [userAuth, navigate, setUserAuth, setLoading, postPublished]);
 
   if (!userAuth)
     return;
@@ -54,6 +56,7 @@ export default function HomePage() {
       <Title>
         timeline
       </Title>
+      <PublishCard postPublished={postPublished} setPostPublished={setPostPublished}/>
       <MainContent>
         <Posts
           data={postsData}
