@@ -92,7 +92,7 @@ export default function Post({ data }) {
             <BsPencil
               onClick={toggleEditing}
             />
-            {userAuth.name === data.user && (
+            {userAuth.userId === data.user_id && (
               <DeleteIcon onClick={openModal}>
                 <FaTrash />
               </DeleteIcon>
