@@ -15,7 +15,7 @@ export default function TrendingCard() {
         setHashtagArray(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        alert("Ocorreu um erro ao carregar os trendings, por favor recarregue a página");
       });
   }, []);
 
