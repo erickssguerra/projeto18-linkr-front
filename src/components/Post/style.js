@@ -11,7 +11,6 @@ export const PostContainer = styled.div`
   flex-direction: row;
   padding: 1.2rem 0.8rem;
   margin-bottom: 1rem;
-  position: relative;
   font-family: !important'Lato', sans-serif;
 
   @media (max-width: 1024px) {
@@ -83,10 +82,15 @@ export const PostIcons = styled.div`
 export const DeleteIcon = styled.button`
   font-size: 1rem;
   color: #ffffff;
-  position: absolute;
   top: 1rem;
   right: 1rem;
   background: #171717;
   border: none;
   cursor: pointer;
+  margin: 0 1rem;
+
+  @media (min-width: 768px) {
+    margin-right: 0;
+    margin-left: 1rem;
+  }
 `;

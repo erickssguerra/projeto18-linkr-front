@@ -49,6 +49,9 @@ export const Close = styled.button`
 export const Comfirm = styled.button`
   width: 4rem;
   height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #1877f2;
   border-radius: 0.3rem;
   border: none;

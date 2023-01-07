@@ -1,4 +1,4 @@
-import { BsPencil } from 'react-icons/bs';
+import { BsPencil } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import { useAuth } from "../../providers";
@@ -12,39 +12,39 @@ import {
   LeftContainer,
   LikesContainer,
   UserName,
-  DeleteIcon
+  DeleteIcon,
 } from "./style";
 import Snippet from "../Snippet";
 import Like from "../Like";
-import PostDescription from '../PostDescription';
+import PostDescription from "../PostDescription";
 import { ModalComponent } from "../Modal";
 import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
 
-
-export default function Post({ data }) {
-  console.log(data);
+export default function Post({ data, postDeleted, setPostDeleted }) {
   const [isEditing, setEditing] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [alertModalIsOpen, setAlertIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const { userAuth } = useAuth();
   const snippetData = {
     title: data.metadata.title,
     description: data.metadata.description,
     url: data.url,
-    icon: data.metadata.icon
+    icon: data.metadata.icon,
   };
 
   function openModal() {
     setIsOpen(true);
-  };
+  }
 
   const toggleEditing = () => {
     setEditing(!isEditing);
   };
 
   function deletePost() {
+    setLoading(true);
     api
       .delete(`/timeline/${data.post_id}`, {
         headers: {
@@ -52,14 +52,17 @@ export default function Post({ data }) {
         },
       })
       .then((response) => {
+        setLoading(false);
         setIsOpen(false);
+        setPostDeleted(!postDeleted);
       })
       .catch((error) => {
+        setLoading(false);
         setIsOpen(false);
         setAlertMessage(error.response.data);
         setAlertIsOpen(true);
       });
-  };
+  }
 
   return (
     <PostContainer>
@@ -70,6 +73,7 @@ export default function Post({ data }) {
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
         deletePost={deletePost}
+        loading={loading}
       />
       <AlertModalComponent
         title="Action could not be completed!"
@@ -85,14 +89,10 @@ export default function Post({ data }) {
       </LeftContainer>
       <RightContainer>
         <UpperContent>
-          <UserName>
-            {data.user}
-          </UserName>
+          <UserName>{data.user}</UserName>
           <PostIcons>
-            <BsPencil
-              onClick={toggleEditing}
-            />
-            {userAuth.name === data.user && (
+            <BsPencil onClick={toggleEditing} />
+            {userAuth.userId === data.user_id && (
               <DeleteIcon onClick={openModal}>
                 <FaTrash />
               </DeleteIcon>
@@ -103,11 +103,11 @@ export default function Post({ data }) {
           data={data}
           state={{
             isEditing: isEditing,
-            setEditing: setEditing
+            setEditing: setEditing,
           }}
         />
         <Snippet snippetData={snippetData} />
       </RightContainer>
     </PostContainer>
   );
-};
+}
