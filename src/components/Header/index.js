@@ -7,6 +7,7 @@ import {
   MenuContainer,
   DropdownMenuActive,
   Option,
+  HeaderLink
 } from "./style";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useState } from "react";
@@ -31,7 +32,9 @@ export default function Header() {
 
   return (
     <Container>
-      <HeaderText>linkr</HeaderText>
+      <HeaderLink to='/timeline'>
+        <HeaderText>linkr</HeaderText>
+      </HeaderLink>
       <HeaderMenu>
         <MenuSelect onClick={selectMenu}>
           {openMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
