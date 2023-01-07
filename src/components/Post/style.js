@@ -79,7 +79,7 @@ export const PostIcons = styled.div`
 
 `;
 
-export const DeleteIcon = styled.button`
+export const PostIcon = styled.button`
   font-size: 1rem;
   color: #ffffff;
   top: 1rem;
