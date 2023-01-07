@@ -71,7 +71,7 @@ export default function HomePage() {
         </PublishAndPostsDiv>
 
         <TrendingDiv>
-          <TrendingCard />
+          <TrendingCard postPublished={postPublished}/>
         </TrendingDiv>
       </PageContent>
     </Container>

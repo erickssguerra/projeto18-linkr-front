@@ -32,6 +32,9 @@ export const list = styled.ul`
   letter-spacing: 0.05em;
   color: #ffffff;
 
+  display: ${(props) => props.isLoading ? "flex" : "inline"};
+  justify-content: center;
+
   li {
     margin-bottom: 7px;
     cursor: pointer;
