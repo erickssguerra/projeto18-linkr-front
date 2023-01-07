@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import { loadingButton } from "../../assets/Spinners";
 import * as Style from "./style";
 import "./style.css";
 
@@ -11,9 +12,8 @@ export function ModalComponent({
   modalIsOpen,
   setIsOpen,
   deletePost,
+  loading,
 }) {
-  let subtitle;
-
   function closeModal() {
     setIsOpen(false);
   }
@@ -21,13 +21,22 @@ export function ModalComponent({
   return (
     <div>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="Modal">
-        <Style.Title ref={(_subtitle) => (subtitle = _subtitle)}>
-          {title}
-        </Style.Title>
-        <Style.ButtonContainer>
-          <Style.Close onClick={closeModal}>{close}</Style.Close>
-          <Style.Comfirm onClick={deletePost}>{confirm}</Style.Comfirm>
-        </Style.ButtonContainer>
+        <Style.Title>{title}</Style.Title>
+        {loading ? (
+          <Style.ButtonContainer>
+            <Style.Close disabled={loading}>{close}</Style.Close>
+            <Style.Comfirm disabled={loading}>{loadingButton}</Style.Comfirm>
+          </Style.ButtonContainer>
+        ) : (
+          <Style.ButtonContainer>
+            <Style.Close onClick={closeModal} disabled={loading}>
+              {close}
+            </Style.Close>
+            <Style.Comfirm onClick={deletePost} disabled={loading}>
+              {confirm}
+            </Style.Comfirm>
+          </Style.ButtonContainer>
+        )}
       </Modal>
     </div>
   );
