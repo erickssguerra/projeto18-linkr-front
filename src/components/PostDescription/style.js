@@ -17,6 +17,9 @@ export const EditInput = styled.input`
   border-radius: 0.3rem;
   font-family: 'Lato', sans-serif;
   padding: 0.4rem;
+  opacity: ${(props) => (props.enabled ? '1' : '0.7')};
+  caret-color: ${(props) => (props.enabled) ? 'initial' : 'transparent'};
+  cursor: ${(props) => (props.enabled ? 'initial' : 'default')};
 
   :focus {
     outline: none;

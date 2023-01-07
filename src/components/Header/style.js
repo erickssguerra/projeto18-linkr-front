@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
+
 import { device } from "../../assets/breakpoints";
 
 export const Container = styled.header`
@@ -84,4 +86,8 @@ export const Option = styled.div`
   &:hover {
     color: #ff0000;
   }
+`;
+
+export const HeaderLink = styled(Link)`
+  text-decoration: none;
 `;

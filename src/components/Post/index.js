@@ -12,7 +12,7 @@ import {
   LeftContainer,
   LikesContainer,
   UserName,
-  DeleteIcon,
+  PostIcon,
 } from "./style";
 import Snippet from "../Snippet";
 import Like from "../Like";
@@ -90,18 +90,20 @@ export default function Post({ data, postDeleted, setPostDeleted }) {
       <RightContainer>
         <UpperContent>
           <UserName>{data.user}</UserName>
-          <PostIcons>
-            <BsPencil onClick={toggleEditing} />
-            {userAuth.userId === data.user_id && (
-              <DeleteIcon onClick={openModal}>
+          {userAuth.userId === data.user_id && (
+            <PostIcons>
+              <PostIcon onClick={toggleEditing}>
+                <BsPencil />
+              </PostIcon>
+              <PostIcon onClick={openModal}>
                 <FaTrash />
-              </DeleteIcon>
-            )}
-          </PostIcons>
+              </PostIcon>
+            </PostIcons>
+          )}
         </UpperContent>
         <PostDescription
           data={data}
-          state={{
+          editState={{
             isEditing: isEditing,
             setEditing: setEditing,
           }}
