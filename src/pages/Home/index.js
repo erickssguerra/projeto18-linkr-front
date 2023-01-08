@@ -19,7 +19,7 @@ import TrendingCard from "../../components/TrendingCard";
 export default function HomePage() {
   const [postsData, setPostsData] = useState(undefined);
   const [isLoading, setLoading] = useState(0);
-  const { userAuth, setUserAuth } = useAuth();
+  const { userAuth, setUserAuth, update } = useAuth();
   const [postPublished, setPostPublished] = useState(false);
   const [postDeleted, setPostDeleted] = useState(false);
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function HomePage() {
     }
 
     fetchData();
-  }, [userAuth, navigate, setUserAuth, setLoading, postPublished, postDeleted]);
+  }, [userAuth, navigate, setUserAuth, setLoading, postPublished, postDeleted, update]);
 
   if (!userAuth) return;
 
