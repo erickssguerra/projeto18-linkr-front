@@ -13,6 +13,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers";
+import HeaderInput from "../HeaderInput";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function Header() {
       <HeaderLink to='/timeline'>
         <HeaderText>linkr</HeaderText>
       </HeaderLink>
+      <HeaderInput />
       <HeaderMenu>
         <MenuSelect onClick={selectMenu}>
           {openMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
