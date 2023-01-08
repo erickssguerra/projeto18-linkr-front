@@ -84,7 +84,7 @@ export default function Post({ data, postDeleted, setPostDeleted }) {
       <LeftContainer>
         <UserImg src={data.userImage} />
         <LikesContainer>
-          <Like likes={data.likes} />
+          <Like likes={data.likes} postId={data.id}/>
         </LikesContainer>
       </LeftContainer>
       <RightContainer>

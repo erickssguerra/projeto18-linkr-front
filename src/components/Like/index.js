@@ -2,13 +2,23 @@ import * as Icons from "../../assets/Icons/";
 import * as S from "./style";
 import { useAuth } from "../../providers";
 import { useState, useEffect } from "react";
+import { api, config } from "../../services";
 
-export default function Like({ likes }) {
-  const { userAuth } = useAuth();
+export default function Like({ likes, postId }) {
+  const { userAuth, update, setUpdate } = useAuth();
   const [iconLike, setIconLike] = useState(<Icons.OutlineHeart />);
+ 
 
   function postLike() {
-    alert("clicou");
+  
+    api
+      .post(`/like/${postId}`, {}, config(userAuth.token))
+      .then((res) => {
+        setUpdate(!update);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   useEffect(() => {

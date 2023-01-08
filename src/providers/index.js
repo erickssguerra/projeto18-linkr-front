@@ -4,6 +4,7 @@ const AuthContext = createContext({});
 
 export const AuthProvider = (props) => {
   const [userAuth, setUserAuth] = useState(undefined);
+  const [update, setUpdate]=useState(false)
 
   useEffect(() => {
     const userStorage = localStorage.getItem("linkr");
@@ -15,7 +16,7 @@ export const AuthProvider = (props) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ userAuth, setUserAuth }}>
+    <AuthContext.Provider value={{ userAuth, setUserAuth, update, setUpdate }}> 
       {props.children}
     </AuthContext.Provider>
   );
