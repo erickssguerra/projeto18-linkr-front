@@ -50,7 +50,7 @@ export default function HeaderInput() {
 
       if (searchValue.length >= 3) {
         try {
-          const res = await api.get(`/user/${searchValue}`);
+          const res = await api.get(`/user/search/${searchValue}`);
 
           setUsers(res.data);
           setSearchOpen(true);
