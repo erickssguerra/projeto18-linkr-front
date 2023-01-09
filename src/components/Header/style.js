@@ -54,13 +54,11 @@ export const MenuImage = styled.img`
 `;
 
 export const MenuContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 5rem;
   border-bottom-left-radius: 1rem;
   padding: 1rem;
