@@ -41,6 +41,19 @@ export default function UserPage() {
     }
   }, [userAuth, navigate, setUserAuth, setLoading, update]);
 
+  async function updateData() {
+    try {
+      const res = await api.get(`/user/${id}`, {
+        headers: { Authorization: `Bearer ${userAuth.token}` },
+      });
+
+      setPostsData(res.data);
+    } catch (error) {
+      alert(error);
+      return navigate(`/user/${id}`);
+    }
+  }
+
   if (!userAuth || !postsData) return;
 
   return (
@@ -55,6 +68,7 @@ export default function UserPage() {
           <PostsList
             data={postsData.formattedData}
             isLoading={isLoading}
+            updateData={updateData}
           />
         </Style.MainContent>
         <Style.TrendingDiv>

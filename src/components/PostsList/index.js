@@ -1,7 +1,7 @@
 import Post from "../Post";
 import { PostsContainer, Message } from "./style";
 
-export default function PostsList({ data, isLoading }) {
+export default function PostsList({ data, isLoading, updateData }) {
   const resolvedData = data;
 
   if (isLoading) {
@@ -24,7 +24,7 @@ export default function PostsList({ data, isLoading }) {
     <>
       <PostsContainer>
         {resolvedData.map((data, index) => {
-          return <Post data={data} key={index} />;
+          return <Post data={data} key={index} updateData={updateData} />;
         })}
       </PostsContainer>
     </>
