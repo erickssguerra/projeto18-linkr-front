@@ -22,7 +22,7 @@ import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
 import { useNavigate } from "react-router-dom";
 
-export default function Post({ data }) {
+export default function Post({ data, updateData }) {
   const [isEditing, setEditing] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [alertModalIsOpen, setAlertIsOpen] = useState(false);
@@ -87,18 +87,24 @@ export default function Post({ data }) {
       <LeftContainer>
         <UserImg src={data.userImage} />
         <LikesContainer>
-          <Like likes={data.likes} postId={data.post_id} />
+          <Like
+            likes={data.likes}
+            postId={data.post_id}
+            updateData={updateData}
+          />
         </LikesContainer>
       </LeftContainer>
       <RightContainer>
         <UpperContent>
-          <UserName onClick={() => navigate(`/user/${data.user_id}`)}>{data.user}</UserName>
+          <UserName onClick={() => navigate(`/user/${data.user_id}`)}>
+            {data.user}
+          </UserName>
           {userAuth.userId === data.user_id && (
             <PostIcons>
               <PostIcon onClick={toggleEditing}>
                 <BsPencil />
               </PostIcon>
-              <PostIcon onClick={openModal}>
+              <PostIcon onClick={openModal} updateData={updateData}>
                 <FaTrash />
               </PostIcon>
             </PostIcons>

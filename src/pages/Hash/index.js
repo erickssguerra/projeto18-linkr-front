@@ -41,6 +41,19 @@ export default function HashPage() {
     }
   }, [userAuth, navigate, setUserAuth, setLoading, update]);
 
+  async function updateData() {
+    try {
+      const res = await api.get(`/hashtag/${hashtag}`, {
+        headers: { Authorization: `Bearer ${userAuth.token}` },
+      });
+
+      setPostsData(res.data);
+    } catch (error) {
+      alert(error);
+      return navigate(`/hashtag/${hashtag}`);
+    }
+  }
+
   if (!userAuth) return;
 
   return (
@@ -52,6 +65,7 @@ export default function HashPage() {
           <PostsList
             data={postsData}
             isLoading={isLoading}
+            updateData={updateData}
           />
         </Style.MainContent>
         <Style.TrendingDiv>

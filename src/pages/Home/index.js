@@ -46,14 +46,20 @@ export default function HomePage() {
     }
 
     fetchData();
-  }, [
-    userAuth,
-    navigate,
-    setUserAuth,
-    setLoading,
-    postPublished,
-    update,
-  ]);
+  }, [userAuth, navigate, setUserAuth, setLoading, postPublished, update]);
+
+  async function updateData() {
+    try {
+      const res = await api.get("/timeline", {
+        headers: { Authorization: `Bearer ${userAuth.token}` },
+      });
+
+      setPostsData(res.data);
+    } catch (error) {
+      alert(error);
+      return navigate("/");
+    }
+  }
 
   if (!userAuth) return;
 
@@ -71,6 +77,7 @@ export default function HomePage() {
             <PostsList
               data={postsData}
               isLoading={isLoading}
+              updateData={updateData}
             />
           </MainContent>
         </PublishAndPostsDiv>
