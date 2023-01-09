@@ -13,15 +13,15 @@ import {
   PublishAndPostsDiv,
   TrendingDiv,
 } from "./style";
-import { useAuth } from "../../providers";
+import { useAuth, useUpdate } from "../../providers";
 import TrendingCard from "../../components/TrendingCard";
 
 export default function HomePage() {
   const [postsData, setPostsData] = useState(undefined);
   const [isLoading, setLoading] = useState(0);
-  const { userAuth, setUserAuth, update } = useAuth();
+  const { userAuth, setUserAuth } = useAuth();
+  const { update } = useUpdate();
   const [postPublished, setPostPublished] = useState(false);
-  const [postDeleted, setPostDeleted] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,7 +46,14 @@ export default function HomePage() {
     }
 
     fetchData();
-  }, [userAuth, navigate, setUserAuth, setLoading, postPublished, postDeleted, update]);
+  }, [
+    userAuth,
+    navigate,
+    setUserAuth,
+    setLoading,
+    postPublished,
+    update,
+  ]);
 
   if (!userAuth) return;
 
@@ -64,14 +71,12 @@ export default function HomePage() {
             <PostsList
               data={postsData}
               isLoading={isLoading}
-              postDeleted={postDeleted}
-              setPostDeleted={setPostDeleted}
             />
           </MainContent>
         </PublishAndPostsDiv>
 
         <TrendingDiv>
-          <TrendingCard postPublished={postPublished}/>
+          <TrendingCard postPublished={postPublished} />
         </TrendingDiv>
       </PageContent>
     </Container>
