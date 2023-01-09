@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { api } from "../services";
 
 const AuthContext = createContext({});
 
@@ -36,3 +37,32 @@ export const UpdateProvider = (props) => {
 };
 
 export const useUpdate = () => useContext(UpdateContext);
+
+const TrendingContext = createContext({});
+
+export const TrendingProvider = (props) => {
+  const [hashtagArray, setHashtagArray] = useState([]);
+
+  function updateTrending() {
+    api
+      .get("/hashtags")
+      .then((res) => {
+        setHashtagArray(res.data);
+      })
+      .catch((err) => {
+        alert(
+          "Ocorreu um erro ao carregar os trendings, por favor recarregue a página"
+        );
+      });
+  }
+
+  return (
+    <TrendingContext.Provider
+      value={{ hashtagArray, setHashtagArray, updateTrending }}
+    >
+      {props.children}
+    </TrendingContext.Provider>
+  );
+};
+
+export const useTrending = () => useContext(TrendingContext);
