@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { api } from "../../services";
 import * as Style from "./style";
-import { useAuth } from "../../providers";
+import { useAuth, useUpdate } from "../../providers";
 import PostsList from "../../components/PostsList";
 import TrendingCard from "../../components/TrendingCard";
 
@@ -13,7 +13,7 @@ export default function UserPage() {
   const [postsData, setPostsData] = useState(undefined);
   const [isLoading, setLoading] = useState(0);
   const { userAuth, setUserAuth } = useAuth();
-  const [postDeleted, setPostDeleted] = useState(false);
+  const { update } = useUpdate();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -39,7 +39,7 @@ export default function UserPage() {
 
       fetchData();
     }
-  }, [userAuth, navigate, setUserAuth, setLoading, postDeleted]);
+  }, [userAuth, navigate, setUserAuth, setLoading, update]);
 
   if (!userAuth || !postsData) return;
 
@@ -55,8 +55,6 @@ export default function UserPage() {
           <PostsList
             data={postsData.formattedData}
             isLoading={isLoading}
-            postDeleted={postDeleted}
-            setPostDeleted={setPostDeleted}
           />
         </Style.MainContent>
         <Style.TrendingDiv>

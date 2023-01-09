@@ -1,14 +1,16 @@
 import { RouterProvider } from "react-router-dom";
-import { AuthProvider } from "./providers";
+import { AuthProvider, UpdateProvider } from "./providers";
 
 import GlobalStyle from "./styles/global";
 import { router } from "./routes";
 
 export default function App() {
   return (
-      <AuthProvider>
+    <AuthProvider>
+      <UpdateProvider>
         <GlobalStyle />
-        <RouterProvider router={router}/>
-      </AuthProvider>
+        <RouterProvider router={router} />
+      </UpdateProvider>
+    </AuthProvider>
   );
 }

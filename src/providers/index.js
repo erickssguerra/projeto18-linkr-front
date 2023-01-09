@@ -4,22 +4,35 @@ const AuthContext = createContext({});
 
 export const AuthProvider = (props) => {
   const [userAuth, setUserAuth] = useState(undefined);
-  const [update, setUpdate]=useState(false)
 
   useEffect(() => {
     const userStorage = localStorage.getItem("linkr");
     if (userStorage) {
       setUserAuth(JSON.parse(userStorage));
     } else {
-        setUserAuth(undefined)
+      setUserAuth(undefined);
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ userAuth, setUserAuth, update, setUpdate }}> 
+    <AuthContext.Provider value={{ userAuth, setUserAuth }}>
       {props.children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+const UpdateContext = createContext({});
+
+export const UpdateProvider = (props) => {
+  const [update, setUpdate] = useState(false);
+
+  return (
+    <UpdateContext.Provider value={{ update, setUpdate }}>
+      {props.children}
+    </UpdateContext.Provider>
+  );
+};
+
+export const useUpdate = () => useContext(UpdateContext);

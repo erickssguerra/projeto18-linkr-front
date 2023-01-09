@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../services";
 import * as Styles from "./style";
 import { loadingTrending } from "../../assets/Spinners";
+import { useUpdate } from "../../providers";
 
 export default function TrendingCard({ postPublished }) {
   const [hashtagArray, setHashtagArray] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { update } = useUpdate();
 
   const navigate = useNavigate();
 
@@ -20,9 +22,11 @@ export default function TrendingCard({ postPublished }) {
         setIsLoading(false);
       })
       .catch((err) => {
-        alert("Ocorreu um erro ao carregar os trendings, por favor recarregue a página");
+        alert(
+          "Ocorreu um erro ao carregar os trendings, por favor recarregue a página"
+        );
       });
-  }, [postPublished]);
+  }, [postPublished, update]);
 
   return (
     <Styles.card>
@@ -33,7 +37,10 @@ export default function TrendingCard({ postPublished }) {
           ? loadingTrending
           : hashtagArray.map((hashtagInfo, index) => {
               return (
-                <li key={index} onClick={() => navigate(`/hashtag/${hashtagInfo.name}`)}>
+                <li
+                  key={index}
+                  onClick={() => navigate(`/hashtag/${hashtagInfo.name}`)}
+                >
                   {hashtagInfo.hashtag}
                 </li>
               );

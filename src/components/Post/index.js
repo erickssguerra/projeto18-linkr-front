@@ -1,7 +1,7 @@
 import { BsPencil } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
-import { useAuth } from "../../providers";
+import { useAuth, useUpdate } from "../../providers";
 
 import {
   PostContainer,
@@ -22,7 +22,7 @@ import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
 import { useNavigate } from "react-router-dom";
 
-export default function Post({ data, postDeleted, setPostDeleted }) {
+export default function Post({ data }) {
   const [isEditing, setEditing] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [alertModalIsOpen, setAlertIsOpen] = useState(false);
@@ -30,6 +30,7 @@ export default function Post({ data, postDeleted, setPostDeleted }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { userAuth } = useAuth();
+  const { update, setUpdate } = useUpdate();
   const snippetData = {
     title: data.metadata.title,
     description: data.metadata.description,
@@ -56,7 +57,7 @@ export default function Post({ data, postDeleted, setPostDeleted }) {
       .then((response) => {
         setLoading(false);
         setIsOpen(false);
-        setPostDeleted(!postDeleted);
+        setUpdate(!update);
       })
       .catch((error) => {
         setLoading(false);
@@ -86,7 +87,7 @@ export default function Post({ data, postDeleted, setPostDeleted }) {
       <LeftContainer>
         <UserImg src={data.userImage} />
         <LikesContainer>
-          <Like likes={data.likes} postId={data.id}/>
+          <Like likes={data.likes} postId={data.post_id} />
         </LikesContainer>
       </LeftContainer>
       <RightContainer>

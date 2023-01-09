@@ -1,16 +1,15 @@
 import * as Icons from "../../assets/Icons/";
 import * as S from "./style";
-import { useAuth } from "../../providers";
+import { useAuth, useUpdate } from "../../providers";
 import { useState, useEffect } from "react";
 import { api, config } from "../../services";
 
 export default function Like({ likes, postId }) {
-  const { userAuth, update, setUpdate } = useAuth();
+  const { userAuth } = useAuth();
+  const { update, setUpdate } = useUpdate();
   const [iconLike, setIconLike] = useState(<Icons.OutlineHeart />);
- 
 
   function postLike() {
-  
     api
       .post(`/like/${postId}`, {}, config(userAuth.token))
       .then((res) => {
@@ -23,7 +22,7 @@ export default function Like({ likes, postId }) {
 
   useEffect(() => {
     likes.forEach((like) => {
-      if (like.user_id == userAuth.userId) {
+      if (like.user_id === userAuth.userId) {
         setIconLike(<Icons.FillHeart />);
       }
     });
