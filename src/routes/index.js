@@ -5,7 +5,7 @@ import HashPage from "../pages/Hash";
 import SignInPage from "../pages/SignIn";
 import SignUpPage from "../pages/SignUp";
 import UserPage from "../pages/User";
-import NotFoundPage from "../pages/NotFount";
+import NotFoundPage from "../pages/NotFound";
 
 export const router = createBrowserRouter([
   {
