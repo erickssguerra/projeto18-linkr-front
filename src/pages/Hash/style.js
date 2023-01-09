@@ -13,7 +13,7 @@ export const Title = styled.h1`
     width: 100%;
     font-size: 33px;
     padding-left: 1rem;
-    margin: 2rem 0;
+    margin: 6rem 0 2rem 0;
   }
 `;
 

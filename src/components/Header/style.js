@@ -77,6 +77,7 @@ export const DropdownMenuActive = styled.div`
   border-bottom-left-radius: 1rem;
   padding: 1rem;
   background: #171717;
+  z-index: 2;
 `;
 
 export const Option = styled.div`

@@ -9,7 +9,7 @@ export const Title = styled.h1`
 
   @media (max-width: 1024px) {
     width: 100%;
-    font-size: 33px;
+    font-size: 1.5rem;
     padding-left: 1rem;
     margin: 2rem 0;
   }
@@ -54,6 +54,10 @@ width: 941px;
 display: flex;
 align-items: center;
 margin: 4rem 0 2rem 0;
+
+@media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const UserImg = styled.img`
