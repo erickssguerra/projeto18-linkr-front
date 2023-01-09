@@ -9,6 +9,10 @@ export const InputContainer = styled.div`
   height: 45px;
   border: none;
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -27,12 +31,20 @@ export const StyledInput = styled.input`
   :focus {
     outline: none;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const SearchIcon = styled.div`
   position: absolute;
   top: 25%;
   right: 20px;
+  
+  @media (max-width: 250px) {
+    display: none;
+  }
 `;
 
 export const StyledIcon = styled(IoIosSearch)`
@@ -47,6 +59,10 @@ export const SearchDropDown = styled.div`
   border-radius: 8px;
   width: 563px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const List = styled.ul`
@@ -84,4 +100,14 @@ export const SearchContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 1024px) {
+    top: 102px;
+  };
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: absolute;
+    padding: 0 1rem;
+  }
 `;

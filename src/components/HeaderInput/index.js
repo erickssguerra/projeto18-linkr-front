@@ -30,7 +30,7 @@ function UserList({ users, navigateToUser }) {
               <UserName onClick={() => navigateToUser(u.id)}>
                 {u.name}
               </UserName>
-            </User>      
+            </User>
           );
         })
       }
@@ -46,21 +46,17 @@ export default function HeaderInput() {
 
   useEffect(() => {
     async function fetchUsers() {
-      if (!searchValue)
+      if (!searchValue || searchValue.length < 3)
         return setSearchOpen(false);
 
-      if (searchValue.length >= 3) {
-        try {
-          const res = await api.get(`/user/search/${searchValue}`);
+      try {
+        const res = await api.get(`/user/search/${searchValue}`);
 
-          setUsers(res.data);
-          setSearchOpen(true);
-        } catch (e) {
-          alert('Could not search for users');
-        };
-      }
-      else
-        setSearchOpen(false);
+        setUsers(res.data);
+        setSearchOpen(true);
+      } catch (e) {
+        alert('Could not search for users');
+      };
     };
 
     fetchUsers();
@@ -88,7 +84,7 @@ export default function HeaderInput() {
       {
         searchOpen && (
           <SearchDropDown>
-            <UserList users={users} navigateToUser={navigateToUser}/>
+            <UserList users={users} navigateToUser={navigateToUser} />
           </SearchDropDown>
         )
       }

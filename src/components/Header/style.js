@@ -8,7 +8,7 @@ export const Container = styled.header`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0;
   height: 5rem;
   width: 100%;
   background: #151515;
@@ -23,6 +23,7 @@ export const HeaderText = styled.h1`
   color: #fff;
   font-family: "Passion One", sans-serif;
   font-size: 3rem;
+  margin-left: 1rem;
 
   @media ${device.desktop} {
       font-size: 4rem;
@@ -32,6 +33,7 @@ export const HeaderText = styled.h1`
 export const HeaderMenu = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 1rem;
 `;
 
 export const MenuSelect = styled.button`
