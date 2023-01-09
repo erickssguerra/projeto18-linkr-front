@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../services";
 import * as Styles from "./style";
 import { loadingTrending } from "../../assets/Spinners";
-import { useUpdate } from "../../providers";
+import { useTrending, useUpdate } from "../../providers";
 
 export default function TrendingCard({ postPublished }) {
-  const [hashtagArray, setHashtagArray] = useState([]);
+  /*   const [hashtagArray, setHashtagArray] = useState([]); */
   const [isLoading, setIsLoading] = useState(false);
   const { update } = useUpdate();
+  const { hashtagArray, setHashtagArray } = useTrending();
 
   const navigate = useNavigate();
 
