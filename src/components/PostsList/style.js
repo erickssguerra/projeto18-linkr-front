@@ -11,4 +11,19 @@ export const PostsContainer = styled.ul`
 
 export const Message = styled.p`
   color: #FFF;
+  display: flex;
+  justify-content: center;
+`;
+
+export const MessageContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const LoadingSpinner = styled.div`
+  margin-top: 12px;
+  margin-left: 8px;
 `;
