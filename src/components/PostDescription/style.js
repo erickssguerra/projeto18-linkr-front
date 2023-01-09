@@ -4,6 +4,7 @@ export const Description = styled.p`
   color: #B7B7B7;
   font-size: 17px;
   margin-bottom: 0.8rem;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     font-size: 15px;
