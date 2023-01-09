@@ -63,6 +63,7 @@ export const UserName = styled.h2`
   font-size: 19px;
   font-family: "Lato", sans-serif;
   margin-bottom: 0.8rem;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     font-size: 17px;

@@ -20,6 +20,7 @@ import PostDescription from "../PostDescription";
 import { ModalComponent } from "../Modal";
 import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
+import { useNavigate } from "react-router-dom";
 
 export default function Post({ data }) {
   const [isEditing, setEditing] = useState(0);
@@ -27,6 +28,7 @@ export default function Post({ data }) {
   const [alertModalIsOpen, setAlertIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const { userAuth } = useAuth();
   const { update, setUpdate } = useUpdate();
   const snippetData = {
@@ -90,7 +92,7 @@ export default function Post({ data }) {
       </LeftContainer>
       <RightContainer>
         <UpperContent>
-          <UserName>{data.user}</UserName>
+          <UserName onClick={() => navigate(`/user/${data.user_id}`)}>{data.user}</UserName>
           {userAuth.userId === data.user_id && (
             <PostIcons>
               <PostIcon onClick={toggleEditing}>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DebounceInput } from "react-debounce-input";
+import { useNavigate } from "react-router-dom";
 
 import { api } from "../../services";
 import {
@@ -15,8 +16,7 @@ import {
   UserName
 } from "./style";
 
-
-function UserList({ users }) {
+function UserList({ users, navigateToUser }) {
   if (!users)
     return;
 
@@ -27,7 +27,7 @@ function UserList({ users }) {
           return (
             <User key={u.name}>
               <UserImage src={u.picture_url} />
-              <UserName>
+              <UserName onClick={() => navigateToUser(u.id)}>
                 {u.name}
               </UserName>
             </User>      
@@ -42,6 +42,7 @@ export default function HeaderInput() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState();
   const [users, setUsers] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUsers() {
@@ -65,6 +66,11 @@ export default function HeaderInput() {
     fetchUsers();
   }, [searchValue, setSearchOpen]);
 
+  function navigateToUser(id) {
+    navigate(`/user/${id}`);
+    setSearchValue('');
+  }
+
   return (
     <SearchContainer>
       <InputContainer>
@@ -82,7 +88,7 @@ export default function HeaderInput() {
       {
         searchOpen && (
           <SearchDropDown>
-            <UserList users={users} />
+            <UserList users={users} navigateToUser={navigateToUser}/>
           </SearchDropDown>
         )
       }
