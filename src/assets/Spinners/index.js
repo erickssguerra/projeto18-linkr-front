@@ -13,6 +13,19 @@ export const loadingButton = (
   />
 );
 
+export const loadingPosts = (
+  <ThreeDots
+    height="15"
+    width="15"
+    radius="3"
+    color="white"
+    ariaLabel="three-dots-loading"
+    wrapperStyle={{}}
+    wrapperClassName=""
+    visible={true}
+  />
+);
+
 export const loadingPage = <RotatingLines strokeColor="#568259" width="100" />;
 
 export const loadingTrending = (

@@ -1,23 +1,31 @@
 import Post from "../Post";
-import { PostsContainer, Message } from "./style";
+import { PostsContainer, Message, MessageContainer, LoadingSpinner } from "./style";
+import { loadingPosts } from "../../assets/Spinners";
 
 export default function PostsList({ data, isLoading, updateData }) {
   const resolvedData = data;
 
   if (isLoading) {
-    return <Message>Loading...</Message>;
-  }
+    return (
+      <MessageContainer>
+        <Message>
+          Loading
+        </Message>
+        <LoadingSpinner>{loadingPosts}</LoadingSpinner>
+      </MessageContainer>
+    );
+  };
 
   if (!data) {
     return (
-      <Message>
+      <MessageContainer>
         An error ocurred while trying to fetch the posts, please refresh the
         page
-      </Message>
+      </MessageContainer>
     );
   }
   if (data.length === 0) {
-    return <Message>There are no posts yet :(</Message>;
+    return <MessageContainer>There are no posts yet :(</MessageContainer>;
   }
 
   return (
