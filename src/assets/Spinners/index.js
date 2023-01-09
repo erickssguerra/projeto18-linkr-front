@@ -1,4 +1,4 @@
-import { ThreeDots, RotatingLines } from "react-loader-spinner";
+import { ThreeDots, RotatingLines, TailSpin } from "react-loader-spinner";
 
 export const loadingButton = (
   <ThreeDots
@@ -14,3 +14,16 @@ export const loadingButton = (
 );
 
 export const loadingPage = <RotatingLines strokeColor="#568259" width="100" />;
+
+export const loadingTrending = (
+  <TailSpin
+    height="80"
+    width="80"
+    color="#FFFFFF"
+    ariaLabel="tail-spin-loading"
+    radius="1"
+    wrapperStyle={{}}
+    wrapperClass=""
+    visible={true}
+  />
+);

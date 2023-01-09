@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import HomePage, { loader as homeLoader } from "../pages/Home";
+import HomePage from "../pages/Home";
 import HashPage from "../pages/Hash";
 import SignInPage from "../pages/SignIn";
 import SignUpPage from "../pages/SignUp";
 import UserPage from "../pages/User";
-import NotFoundPage from "../pages/NotFount";
+import NotFoundPage from "../pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -22,12 +22,11 @@ export const router = createBrowserRouter([
     path: '/timeline',
     element: <HomePage />,
     errorElement: <NotFoundPage />,
-    loader: homeLoader
   },
   {
     path: '/hashtag/:hashtag',
     element: <HashPage />,
-    errorElement: <NotFoundPage />
+    errorElement: <NotFoundPage />,
   },
   {
     path: '/user/:id',

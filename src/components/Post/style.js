@@ -1,46 +1,97 @@
 import styled from "styled-components";
 
+
 export const PostContainer = styled.div`
   background: #171717;
-  width: 36rem;
-  height: 15rem;
+  width: 611px;
+  height: 276px;
   border-radius: 1rem;
   display: flex;
   align-items: center;
   flex-direction: row;
-  padding: 1rem;
+  padding: 1.2rem 0.8rem;
   margin-bottom: 1rem;
+  font-family: !important'Lato', sans-serif;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    border-radius: 0;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    height: 232px;
+  }
 `;
 
 export const LeftContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-right: 1rem;
+  margin-right: 0.8rem;
+  align-items: center;
 `;
 
 export const UserImg = styled.img`
-  height: 4rem;
-  width: 4rem;
+  height: 50px;
+  width: 50px;
   border-radius: 2rem;
-  background: #FFF;
+  background: #fff;
+
+  @media (max-width: 768px) {
+    height: 40px;
+    width: 40px;
+  }
 `;
 
-export const LikesContainer = styled.div` 
-
+export const LikesContainer = styled.div`
+  width: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
 `;
 
 export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 20rem;
 `;
 
 export const UserName = styled.h2`
+  font-size: 19px;
+  font-family: "Lato", sans-serif;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 17px;
+  }
+`;
+
+export const UpperContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const PostIcons = styled.div`
 
 `;
 
-export const Description = styled.p`
+export const PostIcon = styled.button`
+  font-size: 1rem;
+  color: #ffffff;
+  top: 1rem;
+  right: 1rem;
+  background: #171717;
+  border: none;
+  cursor: pointer;
+  margin: 0 1rem;
 
+  @media (min-width: 768px) {
+    margin-right: 0;
+    margin-left: 1rem;
+  }
 `;

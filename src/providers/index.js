@@ -10,7 +10,7 @@ export const AuthProvider = (props) => {
     if (userStorage) {
       setUserAuth(JSON.parse(userStorage));
     } else {
-        setUserAuth(undefined)
+      setUserAuth(undefined);
     }
   }, []);
 
@@ -22,3 +22,17 @@ export const AuthProvider = (props) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+const UpdateContext = createContext({});
+
+export const UpdateProvider = (props) => {
+  const [update, setUpdate] = useState(false);
+
+  return (
+    <UpdateContext.Provider value={{ update, setUpdate }}>
+      {props.children}
+    </UpdateContext.Provider>
+  );
+};
+
+export const useUpdate = () => useContext(UpdateContext);
