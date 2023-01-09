@@ -6,6 +6,9 @@ flex-direction: row;
 border-radius: 1rem;
 border: 0.1rem solid #4D4D4D;
 overflow: hidden;
+overflow-wrap: anywhere;
+white-space: pre-wrap;
+text-overflow: ellipsis;
 width: 503px;
 height: 155px;
 text-decoration: none;
@@ -28,7 +31,7 @@ justify-content: space-between;
 export const SnippetText = styled.div`
   text-decoration: none;
   padding: 1rem;
-  width: 80%;
+  overflow: hidden;
 `;
 
 export const SnippetImg = styled.img`
@@ -57,9 +60,11 @@ export const SnippetDescription = styled.p`
   color: #9B9595;
   font-family: 'Lato', sans-serif;
   margin-bottom: 0.5rem;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     font-size: 9px;
+    height: 40px;
   }
 `;
 
