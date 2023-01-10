@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://linkr-dhw7.onrender.com/",
+  baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
 });
 
 export function config(token) {
