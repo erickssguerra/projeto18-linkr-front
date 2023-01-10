@@ -41,7 +41,7 @@ export default function UserPage() {
 
       fetchData();
     }
-  }, [userAuth, navigate, setUserAuth, setLoading, update]);
+  }, [userAuth, navigate, setUserAuth, setLoading, update, id]);
 
   useEffect(() => {
     if (userAuth) {
@@ -59,7 +59,7 @@ export default function UserPage() {
 
       fetchData();
     }
-  }, [userAuth, update]);
+  }, [userAuth, id]);
 
   function follow() {
     setLoadingFollowButton(true);
