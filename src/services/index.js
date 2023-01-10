@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://linkr-dhw7.onrender.com/",
+  baseURL: "http://localhost:4000",
 });
 
 export function config(token) {
