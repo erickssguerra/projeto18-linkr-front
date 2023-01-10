@@ -1,24 +1,35 @@
 import * as Icons from "../../assets/Icons/";
 import * as S from "./style";
-import { useAuth } from "../../providers";
+import { useAuth, useUpdate } from "../../providers";
 import { useState, useEffect } from "react";
 import { api, config } from "../../services";
 
-export default function Like({ likes, postId, updateData }) {
+export default function Like({ postId }) {
   const { userAuth } = useAuth();
   const [iconLike, setIconLike] = useState(false);
+  const [likes, setLikes] = useState([]);
   const [likesMessage, setLikesMessage] = useState("None liked yet");
   function postLike() {
     api
       .post(`/like/${postId}`, {}, config(userAuth.token))
       .then((res) => {
         setIconLike(!iconLike);
-        updateData();
+        setLikes(res.data)
       })
       .catch((err) => {
         console.log(err);
       });
   }
+  useEffect(() => {
+    api
+      .get(`/like/${postId}`, config(userAuth.token))
+      .then((res) => {
+        setLikes(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     const arrayUsersId = [];
@@ -78,14 +89,14 @@ export default function Like({ likes, postId, updateData }) {
         `You, ${arrayUsersName[0]} and ${arrayUsersId.length - 2}`
       );
     }
-  }, [updateData]);
+  }, [likes]);
 
   return (
     <>
       <S.Icon onClick={postLike}>
         {iconLike ? <Icons.FillHeart /> : <Icons.OutlineHeart />}
         <S.LikesCount role="tooltip" aria-label={likesMessage}>
-          {likes.length} likes
+          {likes?.length} likes
         </S.LikesCount>
       </S.Icon>
     </>
