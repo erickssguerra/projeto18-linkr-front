@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DebounceInput } from "react-debounce-input";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../providers";
 
 import { api } from "../../services";
 import {
@@ -13,27 +14,24 @@ import {
   List,
   User,
   UserImage,
-  UserName
+  UserName,
+  IsFollowing,
 } from "./style";
 
 function UserList({ users, navigateToUser }) {
-  if (!users)
-    return;
+  if (!users) return;
 
   return (
     <List>
-      {
-        users.map(u => {
-          return (
-            <User key={u.name}>
-              <UserImage src={u.picture_url} />
-              <UserName onClick={() => navigateToUser(u.id)}>
-                {u.name}
-              </UserName>
-            </User>
-          );
-        })
-      }
+      {users.map((u, id) => {
+        return (
+          <User key={id} onClick={() => navigateToUser(u.id)}>
+            <UserImage src={u.picture_url} />
+            <UserName>{u.name}</UserName>
+            {u.is_following && <IsFollowing>• following</IsFollowing>}
+          </User>
+        );
+      })}
     </List>
   );
 }
@@ -42,29 +40,31 @@ export default function HeaderInput() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState();
   const [users, setUsers] = useState();
+  const { userAuth } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUsers() {
-      if (!searchValue || searchValue.length < 3)
-        return setSearchOpen(false);
+      if (!searchValue || searchValue.length < 3) return setSearchOpen(false);
 
       try {
-        const res = await api.get(`/user/search/${searchValue}`);
+        const res = await api.get(`/user/search/${searchValue}`, {
+          headers: { Authorization: `Bearer ${userAuth.token}` },
+        });
 
         setUsers(res.data);
         setSearchOpen(true);
       } catch (e) {
-        alert('Could not search for users');
-      };
-    };
+        alert("Could not search for users");
+      }
+    }
 
     fetchUsers();
   }, [searchValue, setSearchOpen]);
 
   function navigateToUser(id) {
     navigate(`/user/${id}`);
-    setSearchValue('');
+    setSearchValue("");
   }
 
   return (
@@ -72,7 +72,7 @@ export default function HeaderInput() {
       <InputContainer>
         <DebounceInput
           element={StyledInput}
-          placeholder={'Search for people'}
+          placeholder={"Search for people"}
           debounceTimeout={300}
           onChange={(e) => setSearchValue(e.target.value)}
           value={searchValue}
@@ -81,13 +81,11 @@ export default function HeaderInput() {
           <StyledIcon />
         </SearchIcon>
       </InputContainer>
-      {
-        searchOpen && (
-          <SearchDropDown>
-            <UserList users={users} navigateToUser={navigateToUser} />
-          </SearchDropDown>
-        )
-      }
+      {searchOpen && (
+        <SearchDropDown>
+          <UserList users={users} navigateToUser={navigateToUser} />
+        </SearchDropDown>
+      )}
     </SearchContainer>
   );
-};
+}
