@@ -16,10 +16,21 @@ import {
   UserImage,
   UserName,
   IsFollowing,
+  UserEmpty,
 } from "./style";
 
 function UserList({ users, navigateToUser }) {
   if (!users) return;
+
+  if (users.length === 0) {
+    return (
+      <List>
+        <UserEmpty>
+          <UserName>No user was found</UserName>
+        </UserEmpty>
+      </List>
+    );
+  }
 
   return (
     <List>

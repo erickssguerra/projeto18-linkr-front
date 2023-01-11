@@ -68,6 +68,17 @@ export const List = styled.ul`
   width: 100%;
 `;
 
+export const UserEmpty = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+
+  :hover {
+    background: rgba(200, 200, 200, 1);
+  }
+`;
+
 export const User = styled.li`
   display: flex;
   flex-direction: row;
