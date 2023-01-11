@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
 
-
 export const InputContainer = styled.div`
   position: relative;
   z-index: 2;
@@ -11,7 +10,7 @@ export const InputContainer = styled.div`
   border-radius: 8px;
 
   @media (max-width: 768px) {
-    width: 95%;
+    width: 100%;
   }
 `;
 
@@ -20,12 +19,12 @@ export const StyledInput = styled.input`
   height: 45px;
   border: none;
   border-radius: 8px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 19px;
   padding: 1rem;
 
   ::placeholder {
-    color: #C6C6C6;
+    color: #c6c6c6;
   }
 
   :focus {
@@ -41,21 +40,21 @@ export const SearchIcon = styled.div`
   position: absolute;
   top: 25%;
   right: 20px;
-  
+
   @media (max-width: 250px) {
     display: none;
   }
 `;
 
 export const StyledIcon = styled(IoIosSearch)`
-  color: #C6C6C6;
+  color: #c6c6c6;
   font-size: 25px;
 `;
 
 export const SearchDropDown = styled.div`
   position: absolute;
   padding-top: 45px;
-  background: #E7E7E7;
+  background: #e7e7e7;
   border-radius: 8px;
   width: 563px;
   overflow: hidden;
@@ -67,6 +66,17 @@ export const SearchDropDown = styled.div`
 
 export const List = styled.ul`
   width: 100%;
+`;
+
+export const UserEmpty = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+
+  :hover {
+    background: rgba(200, 200, 200, 1);
+  }
 `;
 
 export const User = styled.li`
@@ -90,24 +100,35 @@ export const UserImage = styled.img`
 `;
 
 export const UserName = styled.p`
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 19px;
   color: #515151;
   margin-left: 0.8rem;
 `;
 
+export const IsFollowing = styled.p`
+  font-family: "Lato", sans-serif;
+  font-size: 19px;
+  color: #c5c5c5;
+  margin-left: 0.8rem;
+`;
+
 export const SearchContainer = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
+  margin: 0 1rem;
 
   @media (max-width: 1024px) {
     top: 102px;
-  };
+  }
 
   @media (max-width: 768px) {
-    width: 100%;
     position: absolute;
-    padding: 0 1rem;
+    top: 120px;
+    margin: 0;
+    width: 90%;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
