@@ -21,6 +21,7 @@ export const MessageContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  color: #ffffff;
 `;
 
 export const LoadingSpinner = styled.div`
