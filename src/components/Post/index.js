@@ -24,6 +24,8 @@ import { ModalComponent } from "../Modal";
 import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
 import { useNavigate } from "react-router-dom";
+import Repost from "../Repost";
+
 
 export default function Post({ data, updateData }) {
   const [isEditing, setEditing] = useState(0);
@@ -92,10 +94,13 @@ export default function Post({ data, updateData }) {
         <LeftContainer>
           <UserImg src={data.userImage} />
           <IconContainer>
-            <Like likes={data.likes} postId={data.post_id} updateData={updateData} />
+            <Like postId={data.post_id} />
           </IconContainer>
           <IconContainer onClick={() => setCommentsOpen(!commentsOpen)}>
             <CommentsInfo />
+          </IconContainer>
+          <IconContainer>
+            <Repost postId={data.post_id}/>
           </IconContainer>
         </LeftContainer>
         
