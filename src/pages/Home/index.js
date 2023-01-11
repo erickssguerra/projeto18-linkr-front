@@ -18,6 +18,7 @@ import TrendingCard from "../../components/TrendingCard";
 
 export default function HomePage() {
   const [postsData, setPostsData] = useState(undefined);
+  const [usersFollowedData, setUsersFollowedData] = useState(undefined);
   const [isLoading, setLoading] = useState(0);
   const { userAuth, setUserAuth } = useAuth();
   const { update } = useUpdate();
@@ -31,6 +32,8 @@ export default function HomePage() {
       setLoading(1);
 
       try {
+        await usersFollowed();
+
         const res = await api.get("/timeline", {
           headers: { Authorization: `Bearer ${userAuth.token}` },
         });
@@ -47,6 +50,19 @@ export default function HomePage() {
 
     fetchData();
   }, [userAuth, navigate, setUserAuth, setLoading, postPublished, update]);
+
+  async function usersFollowed() {
+    try {
+      const res = await api.get("/followers", {
+        headers: { Authorization: `Bearer ${userAuth.token}` },
+      });
+
+      setUsersFollowedData(res.data);
+    } catch (error) {
+      alert(error);
+      return navigate("/");
+    }
+  }
 
   async function updateData() {
     try {
@@ -78,6 +94,7 @@ export default function HomePage() {
               data={postsData}
               isLoading={isLoading}
               updateData={updateData}
+              usersFollowedData={usersFollowedData}
             />
           </MainContent>
         </PublishAndPostsDiv>
