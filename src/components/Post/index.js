@@ -98,7 +98,7 @@ export default function Post({ data, updateData }) {
             <CommentsInfo />
           </IconContainer>
         </LeftContainer>
-        
+
         <RightContainer>
           <UpperContent>
             <UserName onClick={() => navigate(`/user/${data.user_id}`)}>{data.user}</UserName>
@@ -124,7 +124,7 @@ export default function Post({ data, updateData }) {
         </RightContainer>
       </PostContainer>
 
-      <Comments pfp={data.userImage} commentsOpen={commentsOpen} />
+      <Comments post_id={data.post_id} commentsOpen={commentsOpen} />
     </Container>
   );
 }

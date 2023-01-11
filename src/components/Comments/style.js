@@ -23,6 +23,10 @@ export const InputContainer = styled.div`
   display: flex;
   position: relative;
 
+  form{
+    width: 100%;
+  }
+
   @media ${device.tablet} {
     width: auto;
   }
@@ -58,11 +62,14 @@ export const CommentInput = styled.input`
   }
 `;
 
-export const IconDiv = styled.div`
+export const IconButton = styled.button`
   height: 100%;
+  padding: 0px 20px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 
-  padding: 0px 20px;
+  color: #FFFFFF;
 
   display: flex;
   align-items: center;
