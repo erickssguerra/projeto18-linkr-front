@@ -11,6 +11,8 @@ import TrendingCard from "../../components/TrendingCard";
 
 export default function UserPage() {
   const [postsData, setPostsData] = useState(undefined);
+  const [followData, setFollowData] = useState(undefined);
+  const [loadingFollowButton, setLoadingFollowButton] = useState(false);
   const [isLoading, setLoading] = useState(0);
   const { userAuth, setUserAuth } = useAuth();
   const { update } = useUpdate();
@@ -39,7 +41,63 @@ export default function UserPage() {
 
       fetchData();
     }
-  }, [userAuth, navigate, setUserAuth, setLoading, update]);
+  }, [userAuth, navigate, setUserAuth, setLoading, update, id]);
+
+  useEffect(() => {
+    if (userAuth) {
+      async function fetchData() {
+        try {
+          const res = await api.get(`/followers/${id}`, {
+            headers: { Authorization: `Bearer ${userAuth.token}` },
+          });
+
+          setFollowData(res.data);
+        } catch (e) {
+          alert(e.response.data);
+        }
+      }
+
+      fetchData();
+    }
+  }, [userAuth, id]);
+
+  function follow() {
+    setLoadingFollowButton(true);
+
+    api
+      .post(
+        `/followers/${id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${userAuth.token}` },
+        }
+      )
+      .then((res) => {
+        setFollowData(true);
+        setLoadingFollowButton(false);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+        setLoadingFollowButton(false);
+      });
+  }
+
+  function unfollow() {
+    setLoadingFollowButton(true);
+
+    api
+      .delete(`/followers/${id}`, {
+        headers: { Authorization: `Bearer ${userAuth.token}` },
+      })
+      .then((res) => {
+        setFollowData(false);
+        setLoadingFollowButton(false);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+        setLoadingFollowButton(false);
+      });
+  }
 
   async function updateData() {
     try {
@@ -60,8 +118,33 @@ export default function UserPage() {
     <Style.Container>
       <Header />
       <Style.UserInfos>
-        <Style.UserImg src={postsData.user.picture_url} />
-        <Style.Title>{postsData.user.name}'s posts</Style.Title>
+        <Style.UserInfosContainer>
+          <Style.UserImg src={postsData.user.picture_url} />
+          <Style.Title>{postsData.user.name}'s posts</Style.Title>
+        </Style.UserInfosContainer>
+        {userAuth.userId !== parseInt(id) && (
+          <Style.FollowContainer>
+            {followData === undefined ? (
+              <Style.LoadingButton disabled={true}>
+                Loading...
+              </Style.LoadingButton>
+            ) : followData ? (
+              <Style.UnfollowButton
+                onClick={unfollow}
+                disabled={loadingFollowButton}
+              >
+                Unfollow
+              </Style.UnfollowButton>
+            ) : (
+              <Style.FollowButton
+                onClick={follow}
+                disabled={loadingFollowButton}
+              >
+                Follow
+              </Style.FollowButton>
+            )}
+          </Style.FollowContainer>
+        )}
       </Style.UserInfos>
       <Style.PageContent>
         <Style.MainContent>
