@@ -82,7 +82,7 @@ export default function Post({ data, updateData }) {
           confirm="Yes, delete it"
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
-          deletePost={deletePost}
+          propsFunction={deletePost}
           loading={loading}
         />
         <AlertModalComponent

@@ -15,3 +15,5 @@ export const RepostCount = styled.p`
   font-size: 0.8rem;
   margin-top: 2px;
 `;
+
+export const IconContainer = styled.div``

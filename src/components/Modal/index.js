@@ -11,7 +11,7 @@ export function ModalComponent({
   confirm,
   modalIsOpen,
   setIsOpen,
-  deletePost,
+  propsFunction,
   loading,
 }) {
   function closeModal() {
@@ -32,7 +32,7 @@ export function ModalComponent({
             <Style.Close onClick={closeModal} disabled={loading}>
               {close}
             </Style.Close>
-            <Style.Comfirm onClick={deletePost} disabled={loading}>
+            <Style.Comfirm onClick={propsFunction} disabled={loading}>
               {confirm}
             </Style.Comfirm>
           </Style.ButtonContainer>
