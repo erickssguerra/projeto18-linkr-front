@@ -10,13 +10,16 @@ import {
   RightContainer,
   UserImg,
   LeftContainer,
-  LikesContainer,
+  IconContainer,
   UserName,
   PostIcon,
+  Container,
 } from "./style";
 import Snippet from "../Snippet";
 import Like from "../Like";
 import PostDescription from "../PostDescription";
+import CommentsInfo from "../CommentsInfo";
+import Comments from "../Comments";
 import { ModalComponent } from "../Modal";
 import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
@@ -28,6 +31,7 @@ export default function Post({ data, updateData }) {
   const [alertModalIsOpen, setAlertIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [commentsOpen, setCommentsOpen] = useState(false);
   const navigate = useNavigate();
   const { userAuth } = useAuth();
   const { update, setUpdate } = useUpdate();
@@ -68,57 +72,59 @@ export default function Post({ data, updateData }) {
   }
 
   return (
-    <PostContainer>
-      <ModalComponent
-        title="Are you sure you want to delete this post?"
-        close="No, go back"
-        confirm="Yes, delete it"
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-        deletePost={deletePost}
-        loading={loading}
-      />
-      <AlertModalComponent
-        title="Action could not be completed!"
-        subtitle={alertMessage}
-        alertModalIsOpen={alertModalIsOpen}
-        setAlertIsOpen={setAlertIsOpen}
-      />
-      <LeftContainer>
-        <UserImg src={data.userImage} />
-        <LikesContainer>
-          <Like
-            likes={data.likes}
-            postId={data.post_id}
-            updateData={updateData}
-          />
-        </LikesContainer>
-      </LeftContainer>
-      <RightContainer>
-        <UpperContent>
-          <UserName onClick={() => navigate(`/user/${data.user_id}`)}>
-            {data.user}
-          </UserName>
-          {userAuth.userId === data.user_id && (
-            <PostIcons>
-              <PostIcon onClick={toggleEditing}>
-                <BsPencil />
-              </PostIcon>
-              <PostIcon onClick={openModal} updateData={updateData}>
-                <FaTrash />
-              </PostIcon>
-            </PostIcons>
-          )}
-        </UpperContent>
-        <PostDescription
-          data={data}
-          editState={{
-            isEditing: isEditing,
-            setEditing: setEditing,
-          }}
+    <Container>
+      <PostContainer>
+        <ModalComponent
+          title="Are you sure you want to delete this post?"
+          close="No, go back"
+          confirm="Yes, delete it"
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+          deletePost={deletePost}
+          loading={loading}
         />
-        <Snippet snippetData={snippetData} />
-      </RightContainer>
-    </PostContainer>
+        <AlertModalComponent
+          title="Action could not be completed!"
+          subtitle={alertMessage}
+          alertModalIsOpen={alertModalIsOpen}
+          setAlertIsOpen={setAlertIsOpen}
+        />
+        <LeftContainer>
+          <UserImg src={data.userImage} />
+          <IconContainer>
+            <Like likes={data.likes} postId={data.post_id} updateData={updateData} />
+          </IconContainer>
+          <IconContainer onClick={() => setCommentsOpen(!commentsOpen)}>
+            <CommentsInfo />
+          </IconContainer>
+        </LeftContainer>
+        
+        <RightContainer>
+          <UpperContent>
+            <UserName onClick={() => navigate(`/user/${data.user_id}`)}>{data.user}</UserName>
+            {userAuth.userId === data.user_id && (
+              <PostIcons>
+                <PostIcon onClick={toggleEditing}>
+                  <BsPencil />
+                </PostIcon>
+                <PostIcon onClick={openModal} updateData={updateData}>
+                  <FaTrash />
+                </PostIcon>
+              </PostIcons>
+            )}
+          </UpperContent>
+          <PostDescription
+            data={data}
+            editState={{
+              isEditing: isEditing,
+              setEditing: setEditing,
+            }}
+          />
+          <Snippet snippetData={snippetData} />
+        </RightContainer>
+      </PostContainer>
+
+      <Comments pfp={data.userImage} commentsOpen={commentsOpen} />
+    </Container>
   );
 }

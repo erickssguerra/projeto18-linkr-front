@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const PostContainer = styled.div`
   background: #171717;
   width: 611px;
@@ -10,8 +9,11 @@ export const PostContainer = styled.div`
   align-items: center;
   flex-direction: row;
   padding: 1.2rem 0.8rem;
-  margin-bottom: 1rem;
-  font-family: !important'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -44,7 +46,7 @@ export const UserImg = styled.img`
   }
 `;
 
-export const LikesContainer = styled.div`
+export const IconContainer = styled.div`
   width: 4rem;
   display: flex;
   flex-direction: column;
@@ -76,9 +78,7 @@ export const UpperContent = styled.div`
   justify-content: space-between;
 `;
 
-export const PostIcons = styled.div`
-
-`;
+export const PostIcons = styled.div``;
 
 export const PostIcon = styled.button`
   font-size: 1rem;
@@ -93,5 +93,16 @@ export const PostIcon = styled.button`
   @media (min-width: 768px) {
     margin-right: 0;
     margin-left: 1rem;
+  }
+`;
+
+export const Container = styled.div`
+  min-height: 276px;
+  height: 100%;
+  position: relative;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    min-height: 232px;
   }
 `;
