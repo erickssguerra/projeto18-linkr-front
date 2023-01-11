@@ -14,7 +14,7 @@ export default function Like({ postId }) {
       .post(`/like/${postId}`, {}, config(userAuth.token))
       .then((res) => {
         setIconLike(!iconLike);
-        setLikes(res.data)
+        setLikes(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -33,6 +33,9 @@ export default function Like({ postId }) {
 
   useEffect(() => {
     const arrayUsersId = [];
+    if (likes.length == 0) {
+      setLikesMessage("None liked yet");
+    }
     for (let i = 0; i < likes.length; i++) {
       if (likes[i].user_id === userAuth.userId) {
         setIconLike(true);
