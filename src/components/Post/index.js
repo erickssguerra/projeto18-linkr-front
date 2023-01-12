@@ -26,7 +26,6 @@ import { AlertModalComponent } from "../AlertModal";
 import { useNavigate } from "react-router-dom";
 import Repost from "../Repost";
 
-
 export default function Post({ data, updateData }) {
   const [isEditing, setEditing] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -34,6 +33,7 @@ export default function Post({ data, updateData }) {
   const [alertMessage, setAlertMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [commentsOpen, setCommentsOpen] = useState(false);
+  const [commentsNumber, setCommentsNumber] = useState(data.comments.length);
   const navigate = useNavigate();
   const { userAuth } = useAuth();
   const { update, setUpdate } = useUpdate();
@@ -97,10 +97,10 @@ export default function Post({ data, updateData }) {
             <Like postId={data.post_id} />
           </IconContainer>
           <IconContainer onClick={() => setCommentsOpen(!commentsOpen)}>
-            <CommentsInfo commentsNumber={data.comments.length}/>
+            <CommentsInfo commentsNumber={commentsNumber} />
           </IconContainer>
           <IconContainer>
-            <Repost postId={data.post_id}/>
+            <Repost postId={data.post_id} />
           </IconContainer>
         </LeftContainer>
 
@@ -129,7 +129,7 @@ export default function Post({ data, updateData }) {
         </RightContainer>
       </PostContainer>
 
-      <Comments data={data} commentsOpen={commentsOpen} />
+      <Comments data={data} commentsOpen={commentsOpen} setCommentsNumber={setCommentsNumber}/>
     </Container>
   );
 }
