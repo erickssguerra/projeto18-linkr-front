@@ -40,7 +40,7 @@ export default function Comments({ data, commentsOpen }) {
     <Styles.CommentContainer commentsOpen={commentsOpen}>
       <ul>
         {comments?.map((commentData, index) => {
-          return <CommentElement key={index} commentData={commentData} authorId={data.user_id}/>;
+          return <CommentElement key={index} commentData={commentData} PostAuthorId={data.user_id}/>;
         })}
       </ul>
       <Styles.InputContainer>
