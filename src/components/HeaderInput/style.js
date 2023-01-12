@@ -3,12 +3,11 @@ import { IoIosSearch } from "react-icons/io";
 
 export const InputContainer = styled.div`
   position: relative;
-  z-index: 2;
   width: 563px;
   height: 45px;
   border: none;
   border-radius: 8px;
-
+  z-index: 4;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -58,6 +57,7 @@ export const SearchDropDown = styled.div`
   border-radius: 8px;
   width: 563px;
   overflow: hidden;
+  display: ${(props) => props.listOpen};
 
   @media (max-width: 768px) {
     width: 100%;
@@ -117,6 +117,7 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
+  z-index: 4;
 
   @media (max-width: 1024px) {
     top: 102px;
