@@ -97,7 +97,7 @@ export default function Post({ data, updateData }) {
             <Like postId={data.post_id} />
           </IconContainer>
           <IconContainer onClick={() => setCommentsOpen(!commentsOpen)}>
-            <CommentsInfo />
+            <CommentsInfo commentsNumber={data.comments.length}/>
           </IconContainer>
           <IconContainer>
             <Repost postId={data.post_id}/>
@@ -129,7 +129,7 @@ export default function Post({ data, updateData }) {
         </RightContainer>
       </PostContainer>
 
-      <Comments post_id={data.post_id} commentsOpen={commentsOpen} />
+      <Comments data={data} commentsOpen={commentsOpen} />
     </Container>
   );
 }

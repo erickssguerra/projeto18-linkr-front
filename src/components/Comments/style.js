@@ -9,7 +9,12 @@ export const CommentContainer = styled.div`
   margin: -50px 0px 0px 0px;
 
   display: ${(props) => (props.commentsOpen ? "flex" : "none")};
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  ul {
+    width: 100%;
+  }
 
   @media ${device.desktop} {
     width: 611px;
@@ -23,7 +28,7 @@ export const InputContainer = styled.div`
   display: flex;
   position: relative;
 
-  form{
+  form {
     width: 100%;
   }
 
@@ -69,7 +74,7 @@ export const IconButton = styled.button`
   border: none;
   cursor: pointer;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   display: flex;
   align-items: center;
