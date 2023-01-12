@@ -3,8 +3,10 @@ import { SlPaperPlane } from "react-icons/sl";
 import { useAuth } from "../../providers";
 import { useState } from "react";
 import { api } from "../../services";
+import CommentElement from "../CommentElement";
 
-export default function Comments({ post_id, commentsOpen }) {
+export default function Comments({ data, commentsOpen }) {
+  const { post_id, comments } = data;
   const { userAuth } = useAuth();
   const { token, userId, picture_url } = userAuth;
   const [comment, setComment] = useState("");
@@ -36,6 +38,11 @@ export default function Comments({ post_id, commentsOpen }) {
 
   return (
     <Styles.CommentContainer commentsOpen={commentsOpen}>
+      <ul>
+        {comments?.map((commentData, index) => {
+          return <CommentElement key={index} commentData={commentData} authorId={data.user_id}/>;
+        })}
+      </ul>
       <Styles.InputContainer>
         <Styles.CommentProfilePicture src={picture_url} />
         <form onSubmit={submitComment}>
