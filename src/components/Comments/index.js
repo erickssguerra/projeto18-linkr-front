@@ -5,18 +5,20 @@ import { useState } from "react";
 import { api } from "../../services";
 import CommentElement from "../CommentElement";
 
-export default function Comments({ data, commentsOpen }) {
+export default function Comments({ data, commentsOpen, setCommentsNumber }) {
   const { post_id, comments } = data;
   const { userAuth } = useAuth();
   const { token, userId, picture_url } = userAuth;
+
   const [comment, setComment] = useState("");
+  const [commentList, setCommentList] = useState(comments);
 
   function submitComment(e) {
     e.preventDefault();
 
     api
       .post(
-        "/comments",
+        `/comments/${post_id}`,
         {
           user_id: userId,
           post_id,
@@ -29,6 +31,8 @@ export default function Comments({ data, commentsOpen }) {
         }
       )
       .then((res) => {
+        setCommentList(res.data);
+        setCommentsNumber(res.data.length);
         setComment("");
       })
       .catch((err) => {
@@ -39,7 +43,7 @@ export default function Comments({ data, commentsOpen }) {
   return (
     <Styles.CommentContainer commentsOpen={commentsOpen}>
       <ul>
-        {comments?.map((commentData, index) => {
+        {commentList?.map((commentData, index) => {
           return <CommentElement key={index} commentData={commentData} PostAuthorId={data.user_id}/>;
         })}
       </ul>
