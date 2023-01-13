@@ -8,6 +8,11 @@ export const InputContainer = styled.div`
   border: none;
   border-radius: 8px;
   z-index: 4;
+
+  @media (max-width: 1024px) {
+    width: 450px;
+  }
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -28,6 +33,10 @@ export const StyledInput = styled.input`
 
   :focus {
     outline: none;
+  }
+
+  @media (max-width: 1024px) {
+    width: 450px;
   }
 
   @media (max-width: 768px) {
@@ -57,7 +66,11 @@ export const SearchDropDown = styled.div`
   border-radius: 8px;
   width: 563px;
   overflow: hidden;
-  display: ${(props) => props.listOpen};
+  display: ${(props) => props.open ? "initial" : "none"};
+
+  @media (max-width: 1024px) {
+    width: 450px;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
