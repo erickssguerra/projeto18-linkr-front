@@ -1,6 +1,6 @@
 import * as Icons from "../../assets/Icons/";
 import * as S from "./style";
-import { useAuth, useUpdate } from "../../providers";
+import { useAuth } from "../../providers";
 import { useState, useEffect } from "react";
 import { api, config } from "../../services";
 
