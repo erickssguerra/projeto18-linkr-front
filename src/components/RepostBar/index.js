@@ -4,7 +4,7 @@ import * as Icons from "../../assets/Icons";
 
 export default function RepostBar({ data }) {
   const { userAuth } = useAuth();
-
+  
   return (
     <S.Container isReposted={data.repost}>
       <Icons.Repost /> Re-posted by{" "}
