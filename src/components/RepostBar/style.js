@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 611px;
   height: 3.4rem;
   border-radius: 1rem 1rem 0 0 ;
-  display: ${(props) => (props.isFollower ? "none" : "flex")};
+  display: ${(props) => (props.isReposted ? "flex" : "none")};
   align-items: flex-start;
   padding: 10px;
   font-family: "Lato", sans-serif;
