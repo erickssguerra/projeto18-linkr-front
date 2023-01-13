@@ -9,7 +9,12 @@ export const CommentContainer = styled.div`
   margin: -50px 0px 0px 0px;
 
   display: ${(props) => (props.commentsOpen ? "flex" : "none")};
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  ul {
+    width: 100%;
+  }
 
   @media ${device.desktop} {
     width: 611px;
@@ -22,6 +27,10 @@ export const InputContainer = styled.div`
 
   display: flex;
   position: relative;
+
+  form {
+    width: 100%;
+  }
 
   @media ${device.tablet} {
     width: auto;
@@ -58,11 +67,14 @@ export const CommentInput = styled.input`
   }
 `;
 
-export const IconDiv = styled.div`
+export const IconButton = styled.button`
   height: 100%;
+  padding: 0px 20px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 
-  padding: 0px 20px;
+  color: #ffffff;
 
   display: flex;
   align-items: center;

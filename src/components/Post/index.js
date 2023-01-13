@@ -24,6 +24,7 @@ import { ModalComponent } from "../Modal";
 import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
 import { useNavigate } from "react-router-dom";
+import Repost from "../Repost";
 
 export default function Post({ data, updateData }) {
   const [isEditing, setEditing] = useState(0);
@@ -32,6 +33,7 @@ export default function Post({ data, updateData }) {
   const [alertMessage, setAlertMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [commentsOpen, setCommentsOpen] = useState(false);
+  const [commentsNumber, setCommentsNumber] = useState(data.comments.length);
   const navigate = useNavigate();
   const { userAuth } = useAuth();
   const { update, setUpdate } = useUpdate();
@@ -80,7 +82,7 @@ export default function Post({ data, updateData }) {
           confirm="Yes, delete it"
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
-          deletePost={deletePost}
+          propsFunction={deletePost}
           loading={loading}
         />
         <AlertModalComponent
@@ -92,13 +94,16 @@ export default function Post({ data, updateData }) {
         <LeftContainer>
           <UserImg src={data.userImage} />
           <IconContainer>
-            <Like likes={data.likes} postId={data.post_id} updateData={updateData} />
+            <Like postId={data.post_id} />
           </IconContainer>
           <IconContainer onClick={() => setCommentsOpen(!commentsOpen)}>
-            <CommentsInfo />
+            <CommentsInfo commentsNumber={commentsNumber} />
+          </IconContainer>
+          <IconContainer>
+            <Repost postId={data.post_id} />
           </IconContainer>
         </LeftContainer>
-        
+
         <RightContainer>
           <UpperContent>
             <UserName onClick={() => navigate(`/user/${data.user_id}`)}>{data.user}</UserName>
@@ -124,7 +129,7 @@ export default function Post({ data, updateData }) {
         </RightContainer>
       </PostContainer>
 
-      <Comments pfp={data.userImage} commentsOpen={commentsOpen} />
+      <Comments data={data} commentsOpen={commentsOpen} setCommentsNumber={setCommentsNumber}/>
     </Container>
   );
 }

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import { device } from "../../assets/breakpoints";
 
@@ -13,6 +13,7 @@ export const Container = styled.header`
   width: 100%;
   background: #151515;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 5;
 
   @media ${device.desktop} {
     box-shadow: none;
@@ -26,7 +27,7 @@ export const HeaderText = styled.h1`
   margin-left: 1rem;
 
   @media ${device.desktop} {
-      font-size: 4rem;
+    font-size: 4rem;
   }
 `;
 
@@ -54,6 +55,8 @@ export const MenuImage = styled.img`
 `;
 
 export const MenuContainer = styled.div`
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,6 +66,7 @@ export const MenuContainer = styled.div`
   border-bottom-left-radius: 1rem;
   padding: 1rem;
   background: rgba(0, 0, 0, 0);
+  z-index: 5;
 `;
 
 export const DropdownMenuActive = styled.div`
@@ -77,7 +81,6 @@ export const DropdownMenuActive = styled.div`
   border-bottom-left-radius: 1rem;
   padding: 1rem;
   background: #171717;
-  z-index: 2;
 `;
 
 export const Option = styled.div`

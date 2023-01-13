@@ -51,6 +51,7 @@ export default function HeaderInput() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState();
   const [users, setUsers] = useState();
+  const [listOpen, setListOpen] = useState("initial");
   const { userAuth } = useAuth();
   const navigate = useNavigate();
 
@@ -87,13 +88,15 @@ export default function HeaderInput() {
           debounceTimeout={300}
           onChange={(e) => setSearchValue(e.target.value)}
           value={searchValue}
+          onClick={() => setListOpen("initial")}
+          onBlur={() => setListOpen("none")}
         />
         <SearchIcon>
           <StyledIcon />
         </SearchIcon>
       </InputContainer>
       {searchOpen && (
-        <SearchDropDown>
+        <SearchDropDown listOpen={listOpen}>
           <UserList users={users} navigateToUser={navigateToUser} />
         </SearchDropDown>
       )}
