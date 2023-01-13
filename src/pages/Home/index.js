@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useInterval from 'use-interval';
+import { BiRefresh } from 'react-icons/bi';
 
 import Header from "../../components/Header";
 import PostsList from "../../components/PostsList";
@@ -12,21 +14,44 @@ import {
   PageContent,
   PublishAndPostsDiv,
   TrendingDiv,
+  NewPostsAlert,
+  NewPostsText,
+  NewPostsIcon
 } from "./style";
 import { useAuth, useUpdate } from "../../providers";
 import TrendingCard from "../../components/TrendingCard";
+import { getNewPosts, loadNewPosts } from "../../utils/getNewPosts";
 
 export default function HomePage() {
-  const [postsData, setPostsData] = useState(undefined);
+  const [postsData, setPostsData] = useState([]);
+  const [newPosts, setNewPosts] = useState([]);
   const [usersFollowedData, setUsersFollowedData] = useState(undefined);
   const [isLoading, setLoading] = useState(0);
+  const [postPublished, setPostPublished] = useState(false);
   const { userAuth, setUserAuth } = useAuth();
   const { update } = useUpdate();
-  const [postPublished, setPostPublished] = useState(false);
   const navigate = useNavigate();
+
+  const getNewPostsDependencies = {
+    setUserAuth: setUserAuth,
+    postsData: postsData,
+    setNewPosts: setNewPosts,
+    userAuth: userAuth
+  };
+  const getNewPostsFunctions = {
+    navigate: navigate,
+    usersFollowed: usersFollowed
+  };
+  const loadNewPostsDependencies = {
+    setNewPosts: setNewPosts,
+    setPostsData: setPostsData,
+    newPosts: newPosts,
+    postsData: postsData
+  };
 
   useEffect(() => {
     if (!userAuth) return navigate("/");
+    setNewPosts([]);
 
     async function fetchData() {
       setLoading(1);
@@ -50,6 +75,10 @@ export default function HomePage() {
 
     fetchData();
   }, [userAuth, navigate, setUserAuth, setLoading, postPublished, update]);
+
+  useInterval(() => {
+    getNewPosts(getNewPostsDependencies, getNewPostsFunctions);
+  }, 15000);
 
   async function usersFollowed() {
     try {
@@ -91,6 +120,17 @@ export default function HomePage() {
               setPostPublished={setPostPublished}
             />
             <MainContent>
+            <NewPostsAlert
+              active={newPosts.length > 0}
+              onClick={() => { loadNewPosts(loadNewPostsDependencies) }}
+            >
+              <NewPostsText>
+                {newPosts.length} new posts, load more!
+              </NewPostsText>
+              <NewPostsIcon>
+                <BiRefresh />
+              </NewPostsIcon>
+            </NewPostsAlert>
               <PostsList
                 data={postsData}
                 isLoading={isLoading}

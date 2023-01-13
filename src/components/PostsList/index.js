@@ -36,7 +36,7 @@ export default function PostsList({
   if (data.length === 0 && !usersFollowedData) {
     return <MessageContainer>There are no posts yet :(</MessageContainer>;
   }
-  
+
   if (data.length === 0 && usersFollowedData.length === 0) {
     return <MessageContainer>You don't follow anyone yet. Search for new friends!</MessageContainer>;
   }
@@ -45,15 +45,12 @@ export default function PostsList({
     return <MessageContainer>No posts found from your friends</MessageContainer>;
   }
 
-
-
   return (
-    <>
-      <PostsContainer>
-        {resolvedData.map((data, index) => {
-          return <Post data={data} key={index} updateData={updateData} />;
-        })}
-      </PostsContainer>
-    </>
+    <PostsContainer>
+      {resolvedData.map((data) => {
+        return <Post data={data} key={data.post_id} updateData={updateData} />;
+      })}
+    </PostsContainer>
+
   );
 }
