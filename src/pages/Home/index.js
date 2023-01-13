@@ -80,29 +80,31 @@ export default function HomePage() {
   if (!userAuth) return;
 
   return (
-    <Container>
+    <>
       <Header />
-      <Title>timeline</Title>
-      <PageContent>
-        <PublishAndPostsDiv>
-          <PublishCard
-            postPublished={postPublished}
-            setPostPublished={setPostPublished}
-          />
-          <MainContent>
-            <PostsList
-              data={postsData}
-              isLoading={isLoading}
-              updateData={updateData}
-              usersFollowedData={usersFollowedData}
+      <Container>
+        <Title>timeline</Title>
+        <PageContent>
+          <PublishAndPostsDiv>
+            <PublishCard
+              postPublished={postPublished}
+              setPostPublished={setPostPublished}
             />
-          </MainContent>
-        </PublishAndPostsDiv>
+            <MainContent>
+              <PostsList
+                data={postsData}
+                isLoading={isLoading}
+                updateData={updateData}
+                usersFollowedData={usersFollowedData}
+              />
+            </MainContent>
+          </PublishAndPostsDiv>
 
-        <TrendingDiv>
-          <TrendingCard postPublished={postPublished} />
-        </TrendingDiv>
-      </PageContent>
-    </Container>
+          <TrendingDiv>
+            <TrendingCard postPublished={postPublished} />
+          </TrendingDiv>
+        </PageContent>
+      </Container>
+    </>
   );
 }
