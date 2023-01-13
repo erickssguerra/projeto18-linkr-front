@@ -48,7 +48,7 @@ export default function PostsList({
   return (
     <PostsContainer>
       {resolvedData.map((data) => {
-        return <Post data={data} key={data.post_id} updateData={updateData} />;
+        return <Post data={data} key={data.created_at} updateData={updateData} />;
       })}
     </PostsContainer>
 

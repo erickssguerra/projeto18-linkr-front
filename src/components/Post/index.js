@@ -76,7 +76,7 @@ export default function Post({ data, updateData }) {
 
   return (
     <Container>
-      <RepostBar authorId={data.user_id} postId={data.post_id} />
+      <RepostBar data={data} />
       <PostContainer>
         <ModalComponent
           title="Are you sure you want to delete this post?"
@@ -99,7 +99,7 @@ export default function Post({ data, updateData }) {
             <Like postId={data.post_id} />
           </IconContainer>
           <IconContainer onClick={() => setCommentsOpen(!commentsOpen)}>
-            <CommentsInfo commentsNumber={commentsNumber} />
+     <CommentsInfo commentsNumber={commentsNumber} /> 
           </IconContainer>
           <IconContainer>
             <Repost postId={data.post_id} />
@@ -131,7 +131,7 @@ export default function Post({ data, updateData }) {
         </RightContainer>
       </PostContainer>
 
-      <Comments data={data} commentsOpen={commentsOpen} setCommentsNumber={setCommentsNumber}/>
+    <Comments data={data} commentsOpen={commentsOpen} setCommentsNumber={setCommentsNumber}/> 
     </Container>
   );
 }
