@@ -1,6 +1,6 @@
 import * as Icon from "../../assets/Icons";
 import * as S from "./style";
-import { useAuth } from "../../providers";
+import { useAuth, useUpdate } from "../../providers";
 import { api, config } from "../../services";
 import { useState, useEffect } from "react";
 import { ModalComponent } from "../Modal";
@@ -13,6 +13,7 @@ export default function Repost({ postId }) {
   const [alertModalIsOpen, setAlertIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { update, setUpdate } = useUpdate();
 
   useEffect(() => {
     api
@@ -37,6 +38,7 @@ export default function Repost({ postId }) {
         setLoading(false);
         setIsOpen(false);
         setReposts(res.data);
+        setUpdate(!update);
       })
       .catch((err) => {
         setLoading(false);
