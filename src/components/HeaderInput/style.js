@@ -68,6 +68,10 @@ export const SearchDropDown = styled.div`
   overflow: hidden;
   display: ${(props) => props.open ? "initial" : "none"};
 
+  @media (max-width: 1024px) {
+    width: 450px;
+  }
+
   @media (max-width: 768px) {
     width: 100%;
   }
