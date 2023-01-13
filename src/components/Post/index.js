@@ -25,6 +25,7 @@ import { api } from "../../services";
 import { AlertModalComponent } from "../AlertModal";
 import { useNavigate } from "react-router-dom";
 import Repost from "../Repost";
+import RepostBar from "../RepostBar";
 
 
 export default function Post({ data, updateData }) {
@@ -75,6 +76,7 @@ export default function Post({ data, updateData }) {
 
   return (
     <Container>
+      <RepostBar authorId={data.user_id} postId={data.post_id} />
       <PostContainer>
         <ModalComponent
           title="Are you sure you want to delete this post?"
