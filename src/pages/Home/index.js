@@ -109,16 +109,17 @@ export default function HomePage() {
   if (!userAuth) return;
 
   return (
-    <Container>
+    <>
       <Header />
-      <Title>timeline</Title>
-      <PageContent>
-        <PublishAndPostsDiv>
-          <PublishCard
-            postPublished={postPublished}
-            setPostPublished={setPostPublished}
-          />
-          <MainContent>
+      <Container>
+        <Title>timeline</Title>
+        <PageContent>
+          <PublishAndPostsDiv>
+            <PublishCard
+              postPublished={postPublished}
+              setPostPublished={setPostPublished}
+            />
+            <MainContent>
             <NewPostsAlert
               active={newPosts.length > 0}
               onClick={() => { loadNewPosts(loadNewPostsDependencies) }}
@@ -130,19 +131,20 @@ export default function HomePage() {
                 <BiRefresh />
               </NewPostsIcon>
             </NewPostsAlert>
-            <PostsList
-              data={postsData}
-              isLoading={isLoading}
-              updateData={updateData}
-              usersFollowedData={usersFollowedData}
-            />
-          </MainContent>
-        </PublishAndPostsDiv>
+              <PostsList
+                data={postsData}
+                isLoading={isLoading}
+                updateData={updateData}
+                usersFollowedData={usersFollowedData}
+              />
+            </MainContent>
+          </PublishAndPostsDiv>
 
-        <TrendingDiv>
-          <TrendingCard postPublished={postPublished} />
-        </TrendingDiv>
-      </PageContent>
-    </Container>
+          <TrendingDiv>
+            <TrendingCard postPublished={postPublished} />
+          </TrendingDiv>
+        </PageContent>
+      </Container>
+    </>
   );
 }

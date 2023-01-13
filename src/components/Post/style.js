@@ -13,7 +13,7 @@ export const PostContainer = styled.div`
   position: relative;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 0;
 
   @media (max-width: 1024px) {
     width: 100%;
