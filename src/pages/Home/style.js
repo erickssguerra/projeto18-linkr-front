@@ -52,3 +52,33 @@ export const PublishAndPostsDiv = styled.div`
 export const TrendingDiv = styled.div`
 
 `
+
+export const NewPostsAlert = styled.div`
+  height: 61px;
+  width: 611px;
+  margin-bottom: 2rem;
+  background: #1877F2;
+  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
+  display:  ${props => props.active ? 'flex' : 'none'};
+  cursor: pointer;
+
+  :hover {
+    background: rgba(75, 140, 240, 1);
+  }
+`;
+
+export const NewPostsText = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
+  color: #FFF;
+`;
+
+export const NewPostsIcon = styled.div` 
+  margin-left: 4px;
+  margin-top: 4px;
+  font-size: 20px;
+  color: #FFF;
+`;
